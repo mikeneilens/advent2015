@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-01-19T14:22:09" hostname="MacBook-Pro-2" time="0.053">
+  <properties/>
+  <testcase name="part two with first example delivers to 3 houses()" classname="MainTest" time="0.037"/>
+  <testcase name="second example delivers to 4 houses()" classname="MainTest" time="0.0"/>
+  <testcase name="third example delivers to 2 houses()" classname="MainTest" time="0.0"/>
+  <testcase name="part two with second example delivers to 3 houses()" classname="MainTest" time="0.0"/>
+  <testcase name="part two with third example delivers to 11 houses()" classname="MainTest" time="0.0"/>
+  <testcase name="first example delivers to two houses()" classname="MainTest" time="0.0"/>
+  <testcase name="part one()" classname="MainTest" time="0.003"/>
+  <testcase name="part two()" classname="MainTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
