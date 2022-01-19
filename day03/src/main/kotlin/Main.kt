@@ -10,8 +10,9 @@ data class Position(var x:Int = 0, var y:Int=0 ) {
 }
 
 typealias Visits = MutableSet<Position>
+fun Visits() = mutableSetOf<Position>()
 
-fun Visits.housesVisited(directions: String): Visits {
+fun Visits.visitHouses(directions: String): Visits {
     var position = Position()
     add(position)
     directions.forEach { direction ->
@@ -22,9 +23,9 @@ fun Visits.housesVisited(directions: String): Visits {
 }
 
 fun partTwo(directions: String): Int =
-   mutableSetOf<Position>()
-       .housesVisited(santaData(directions,0))
-       .housesVisited(santaData(directions,1))
+   Visits()
+       .visitHouses(santaData(directions,0))
+       .visitHouses(santaData(directions,1))
        .size
 
 

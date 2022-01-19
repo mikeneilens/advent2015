@@ -4,23 +4,19 @@ import org.junit.jupiter.api.Test
 class MainTest {
     @Test
     fun `first example delivers to two houses`() {
-        val visits:Visits = mutableSetOf()
-        assertEquals(2, visits.housesVisited(">").size)
+        assertEquals(2, Visits().visitHouses(">").size)
     }
     @Test
     fun `second example delivers to 4 houses`() {
-        val visits:Visits = mutableSetOf()
-        assertEquals(4, visits.housesVisited("^>v<").size)
+        assertEquals(4, Visits().visitHouses("^>v<").size)
     }
     @Test
     fun `third example delivers to 2 houses`() {
-        val visits:Visits = mutableSetOf()
-        assertEquals(2, visits.housesVisited("^v^v^v^v^v").size)
+        assertEquals(2, Visits().visitHouses("^v^v^v^v^v").size)
     }
     @Test
     fun `part one`() {
-        val visits:Visits = mutableSetOf()
-        assertEquals(2081, visits.housesVisited(puzzleInput).size)
+        assertEquals(2081, Visits().visitHouses(puzzleInput).size)
     }
 
     @Test
