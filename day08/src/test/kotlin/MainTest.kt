@@ -11,28 +11,28 @@ class MainTest {
         assertEquals(0, calcMemoryUsed(string) )
     }
     @Test
-    fun `memory for string containg 3 characterse`() {
+    fun `memory for string containing 3 characters`() {
         val string = """
             "abc"
         """.trimIndent()
         assertEquals(3, calcMemoryUsed(string))
     }
     @Test
-    fun `memory for string containg an escaped quote`() {
+    fun `memory for string containing an escaped quote`() {
         val string = """
             "aaa\"aaa"
         """.trimIndent()
         assertEquals(7, calcMemoryUsed(string))
     }
     @Test
-    fun `memory for string containg an escaped char code`() {
+    fun `memory for string containing an escaped char code`() {
         val string = """
             "\x27"
         """.trimIndent()
         assertEquals(1, calcMemoryUsed(string))
     }
     @Test
-    fun `memory for string containg some plain text plus an escaped char code and an escaped slash`() {
+    fun `memory for string containing some plain text plus an escaped char code and an escaped slash`() {
         val string = """
             "abc\x27def\\"
         """.trimIndent()
@@ -61,28 +61,28 @@ class MainTest {
         assertEquals(6, calcEncodedLength(string) )
     }
     @Test
-    fun `encoded length for string containg 3 characterse`() {
+    fun `encoded length for string containing 3 characters`() {
         val string = """
             "abc"
         """.trimIndent()
         assertEquals(9, calcEncodedLength(string))
     }
     @Test
-    fun `encoded length for string containg an escaped quote`() {
+    fun `encoded length for string containing an escaped quote`() {
         val string = """
             "aaa\"aaa"
         """.trimIndent()
         assertEquals(16, calcEncodedLength(string))
     }
     @Test
-    fun `encoded length for string containg an escaped char code`() {
+    fun `encoded length for string containing an escaped char code`() {
         val string = """
             "\x27"
         """.trimIndent()
         assertEquals(11, calcEncodedLength(string))
     }
     @Test
-    fun `encoded length for string containg some plain text plus an escaped char code and an escaped slash`() {
+    fun `encoded length for string containing some plain text plus an escaped char code and an escaped slash`() {
         val string = """
             "abc\x27def\\"
         """.trimIndent()
