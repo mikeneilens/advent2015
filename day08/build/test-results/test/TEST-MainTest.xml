@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-01-21T17:48:47" hostname="MacBook-Pro-2" time="0.039">
+  <properties/>
+  <testcase name="encoded length for empty string()" classname="MainTest" time="0.016"/>
+  <testcase name="encoded length for string containg 3 characterse()" classname="MainTest" time="0.001"/>
+  <testcase name="memory for string containg an escaped char code()" classname="MainTest" time="0.001"/>
+  <testcase name="encoded length for string containg an escaped char code()" classname="MainTest" time="0.0"/>
+  <testcase name="part two using sample data()" classname="MainTest" time="0.009"/>
+  <testcase name="memory for string containg 3 characterse()" classname="MainTest" time="0.0"/>
+  <testcase name="memory for string containg an escaped quote()" classname="MainTest" time="0.001"/>
+  <testcase name="encoded length for string containg some plain text plus an escaped char code and an escaped slash()" classname="MainTest" time="0.001"/>
+  <testcase name="encoded length for string containg an escaped quote()" classname="MainTest" time="0.0"/>
+  <testcase name="memory for empty string()" classname="MainTest" time="0.0"/>
+  <testcase name="part one()" classname="MainTest" time="0.002"/>
+  <testcase name="part two()" classname="MainTest" time="0.002"/>
+  <testcase name="part one using sample data()" classname="MainTest" time="0.0"/>
+  <testcase name="memory for string containg some plain text plus an escaped char code and an escaped slash()" classname="MainTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
