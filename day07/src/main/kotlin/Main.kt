@@ -4,9 +4,11 @@ abstract class Instruction(val output:String) {
         if (wires[output] == null) processInstruction(wires)
     }
     abstract fun processInstruction(wires:MutableMap<String, Int>)
-}
 
-fun MutableMap<String, Int>.value(n:String) = if (n.toIntOrNull() == null)  getValue(n) else n.toInt()
+    companion object {
+        fun MutableMap<String, Int>.value(s:String) = if (s.toIntOrNull() == null)  getValue(s) else s.toInt()
+    }
+}
 
 class Assign(val input:String, output:String):Instruction(output) {
     override fun processInstruction(wires: MutableMap<String, Int>) {
@@ -69,7 +71,7 @@ fun makeCircuit(instructions: List<Instruction>, wires:MutableMap<String, Int> =
     instructions.forEach {
         try {
             it.connect(wires)
-        } catch(e:NoSuchElementException) { //can't make a connection
+        } catch(e:NoSuchElementException) { //can't make a connection as dependent wire hasnt been connected to anything
             complete = false
         }
     }
