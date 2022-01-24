@@ -8,7 +8,7 @@ fun allTowns(data:List<String>):Set<String> {
     return (startTowns + endTowns)
 }
 
-data class Destination(val name:String, val distance:Int)
+data class Destination(val nextTown:String, val distance:Int)
 
 fun destinations(town:String, data:List<String>):List<Destination> =
     data.filter{it.startsWith(town)}.map(String::toDestination) + data.filter{it.drop(1).contains(town)}.map(String::toDestination2)
@@ -20,21 +20,14 @@ class DistanceRecord(var shortest:Int = Int.MAX_VALUE, var longest:Int = 0  )
 
 typealias DistanceCalculator = (town:String, visited:List<String>, distance:Int, distanceRecord:DistanceRecord, destinationMap:Map<String, List<Destination>>) -> Int
 
-fun findShortestDistance(town: String, visited: List<String>, distance: Int, distanceRecord: DistanceRecord, destinationMap: Map<String, List<Destination>>
-):Int {
+fun findShortestDistance(town: String, visited: List<String>, distance: Int, distanceRecord: DistanceRecord, destinationMap: Map<String, List<Destination>>):Int {
     if (visited.size == destinationMap.keys.size){
         if (distance < distanceRecord.shortest) distanceRecord.shortest = distance
         return distance
     }
-    val destinations = destinationMap.getValue(town).filter{distance + it.distance < distanceRecord.shortest && it.name !in visited}
+    val destinations = destinationMap.getValue(town).filter{distance + it.distance < distanceRecord.shortest && it.nextTown !in visited}
     if (destinations.isEmpty()) return Int.MAX_VALUE
-    return destinations.map { findShortestDistance(
-        it.name,
-        visited + town,
-        distance + it.distance,
-        distanceRecord,
-        destinationMap
-    )}.minOf { it }
+    return destinations.map { findShortestDistance(it.nextTown, visited + town, distance + it.distance, distanceRecord, destinationMap)}.minOf { it }
 }
 
 fun findLongestDistance(town: String, visited: List<String>, distance: Int, distanceRecord: DistanceRecord, destinationMap: Map<String, List<Destination>>):Int {
@@ -42,15 +35,9 @@ fun findLongestDistance(town: String, visited: List<String>, distance: Int, dist
         if (distance > distanceRecord.longest) distanceRecord.longest = distance
         return distance
     }
-    val destinations = destinationMap.getValue(town).filter{it.name !in visited}
+    val destinations = destinationMap.getValue(town).filter{it.nextTown !in visited}
     if (destinations.isEmpty()) return 0
-    return destinations.map { findLongestDistance(
-        it.name,
-        visited + town,
-        distance + it.distance,
-        distanceRecord,
-        destinationMap
-    )}.maxOf { it }
+    return destinations.map { findLongestDistance(it.nextTown, visited + town, distance + it.distance, distanceRecord, destinationMap)}.maxOf { it }
 }
 
 fun partOne(data:List<String>, distanceCalculator:DistanceCalculator ):DistanceRecord {
