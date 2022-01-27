@@ -7,24 +7,22 @@ sealed class JElement{
     data class StringLiteral(val value:String):JElement()
     data class NumberLiteral(val value:Int):JElement()
 
-    fun sum(exclude:String = ""):Int = when(this) {
+    fun sum(exclude:StringLiteral = StringLiteral("") ):Int = when(this) {
         is StringLiteral -> 0
-        is NumberLiteral -> this.value
+        is NumberLiteral -> value
         is JArray -> list.sumOf { it.sum(exclude) }
         is JObject -> {
-            if (members.values.contains(StringLiteral(exclude))) 0
-            else members.values.sumOf { it.sum(exclude) }
+            if (exclude in members.values) 0 else members.values.sumOf { it.sum(exclude) }
             }
         }
     }
-
 
 fun String.toText(opening:Char, closing:Char):String{
     var openings = 1
     var result = ""
     drop(1).forEach{char ->
         if (char == closing && --openings == 0) return opening + result + closing
-        else if (char == opening) openings++
+        if (char == opening) openings++
         result += char
     }
     return result
@@ -45,6 +43,7 @@ fun String.elementText() = when {
     isObject() -> toText('{','}')
     else -> ""
 }
+
 fun String.isNumberLiteral() = startsWith('-') || first() in digits
 fun String.isStringLiteral() = startsWith('"')
 fun String.isArray() = startsWith('[')
@@ -58,28 +57,35 @@ fun String.evaluate():JElement = when {
     else -> JElement.NumberLiteral(0) }
 
 fun String.evaluateArray():JElement.JArray {
-    var arrayText = drop(1).dropLast(1)
-    val list = mutableListOf<JElement>()
+    var arrayText = removeParentheses()
+    val listOfElements = mutableListOf<JElement>()
     while (arrayText.isNotEmpty()) {
-        val arrayItemText = arrayText.elementText()
-        list.add(arrayItemText.evaluate())
-        arrayText = arrayText.drop(arrayItemText.length)
-        if (arrayText.isNotEmpty() && arrayText.first() == ',') arrayText = arrayText.drop(1)
+        arrayText = evaluateEachArrayElement(arrayText, listOfElements)
     }
-    return JElement.JArray(list)
+    return JElement.JArray(listOfElements)
+}
+
+private fun evaluateEachArrayElement(arrayText: String, list: MutableList<JElement>): String {
+    val arrayItemText = arrayText.elementText()
+    list.add(arrayItemText.evaluate())
+    return if (arrayText == arrayItemText) "" else arrayText.drop(arrayItemText.length +1)
 }
 
 fun String.evaluateObject():JElement.JObject {
-    var objectText = drop(1).dropLast(1)
+    var objectText = removeParentheses()
     val members = mutableMapOf<String,JElement>()
     while (objectText.isNotEmpty()) {
-        val key = objectText.elementText().drop(1).dropLast(1)
-        objectText = objectText.drop(key.length + 2)
-        if (objectText.isNotEmpty() && objectText.first() == ':') objectText = objectText.drop(1)
-        val valueText = objectText.elementText()
-        members[key] = valueText.evaluate()
-        objectText = objectText.drop(valueText.length)
-        if (objectText.isNotEmpty() && objectText.first()== ',') objectText = objectText.drop(1)
+        objectText = evaluateObjectMember(objectText, members)
     }
     return JElement.JObject(members)
 }
+
+private fun evaluateObjectMember(objectText: String, members: MutableMap<String, JElement>): String {
+    val key = objectText.elementText()
+    val remainingText = objectText.drop(key.length + 1)
+    val valueText = remainingText.elementText()
+    members[key.removeParentheses()] = valueText.evaluate()
+    return if (remainingText == valueText) "" else remainingText.drop(valueText.length + 1)
+}
+
+fun String.removeParentheses() = drop(1).dropLast(1)

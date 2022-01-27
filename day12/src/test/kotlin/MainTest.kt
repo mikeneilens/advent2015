@@ -87,20 +87,8 @@ class MainTest {
         assertEquals(JElement.JObject(mapOf("a" to JElement.NumberLiteral(123),"b" to JElement.JObject(mapOf("c" to JElement.StringLiteral("xyz"))))),  """{"a":123,"b":{"c":"xyz"}}""".evaluate())
     }
     @Test
-    fun `summing up values in json`() {
-        assertEquals(6,"""[1,2,3]""".evaluate().sum() )
-        assertEquals(6,"""{"a":2,"b":4}""".evaluate().sum() )
-        assertEquals(3,"""[[[3]]]""".evaluate().sum() )
-        assertEquals(3,"""{"a":{"b":4},"c":-1}""".evaluate().sum() )
-        assertEquals(0,"""{"a":[-1,1]}""".evaluate().sum() )
-        assertEquals(0,"""[-1,{"a":1}]""".evaluate().sum() )
-        assertEquals(0,"""[]""".evaluate().sum() )
-        assertEquals(0,"""{}""".evaluate().sum() )
-        assertEquals(119433,puzzleInput.evaluate().sum() )
-    }
-    @Test
     fun `part two`() {
-        assertEquals(68466,puzzleInput.evaluate().sum("red") )
+        assertEquals(68466,puzzleInput.evaluate().sum(JElement.StringLiteral("red")) )
     }
 
 }
