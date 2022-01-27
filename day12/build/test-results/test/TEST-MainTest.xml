@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2022-01-27T00:00:13" hostname="MacBook-Pro-2" time="0.407">
+  <properties/>
+  <testcase name="sample 2 has a total of 3()" classname="MainTest" time="0.025"/>
+  <testcase name="evaluate a json string containing an object containing nothing()" classname="MainTest" time="0.003"/>
+  <testcase name="evaluate a json string containing an array containing one number()" classname="MainTest" time="0.004"/>
+  <testcase name="get text for a number()" classname="MainTest" time="0.0"/>
+  <testcase name="get text for an object()" classname="MainTest" time="0.0"/>
+  <testcase name="sample 1 has a total of 6()" classname="MainTest" time="0.001"/>
+  <testcase name="get text for an string()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an object containing a number()" classname="MainTest" time="0.001"/>
+  <testcase name="evaluate a json string containing an array containing nothing()" classname="MainTest" time="0.001"/>
+  <testcase name="evaluate a json string containing an object containing a number and a object()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an object containing a number and a string()" classname="MainTest" time="0.0"/>
+  <testcase name="sample 4 has a total of 0()" classname="MainTest" time="0.001"/>
+  <testcase name="sample 3 has a total of 0()" classname="MainTest" time="0.0"/>
+  <testcase name="part one()" classname="MainTest" time="0.165"/>
+  <testcase name="part two()" classname="MainTest" time="0.089"/>
+  <testcase name="evaluate a json string containing a number()" classname="MainTest" time="0.0"/>
+  <testcase name="get text for an array()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing a string()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an array containing a number and a string()" classname="MainTest" time="0.012"/>
+  <testcase name="summing up values in json()" classname="MainTest" time="0.094"/>
+  <testcase name="evaluate a json string containing an object containing a number and an array()" classname="MainTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
