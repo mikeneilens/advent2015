@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class MainTest {
@@ -25,6 +26,25 @@ class MainTest {
     @Test
     fun `part one`(){
         assertEquals(119433, puzzleInput.evaluate().sum())
+    }
+    @Test
+    fun `converting to text when invalid json`() {
+        try {
+            """{{"a":123}""".toText('{','}')
+            assertTrue(false,"should have failed with Invalid Json exception")
+        } catch (invalidJson:InvalidJason) {
+            assertEquals("""Invalid json {{"a":123}""", invalidJson.message)
+        }
+    }
+
+    @Test
+    fun `converting to different types of text when invalid json`() {
+        try {
+            """{{"a":123}""".elementText()
+            assertTrue(false,"should have failed with Invalid Json exception")
+        } catch (invalidJson:InvalidJason) {
+            assertEquals("""Invalid json {{"a":123}""", invalidJson.message)
+        }
     }
 
     @Test
@@ -68,23 +88,23 @@ class MainTest {
     }
     @Test
     fun `evaluate a json string containing an object containing nothing`() {
-        assertEquals(JElement.JObject(mapOf()), "{}".evaluate())
+        assertEquals(JElement.JObject(listOf()), "{}".evaluate())
     }
     @Test
     fun `evaluate a json string containing an object containing a number`() {
-        assertEquals(JElement.JObject(mapOf("a" to JElement.NumberLiteral(123))),  """{"a":123}""".evaluate())
+        assertEquals(JElement.JObject(listOf( KeyValue("a", JElement.NumberLiteral(123)))),   """{"a":123}""".evaluate())
     }
     @Test
     fun `evaluate a json string containing an object containing a number and a string`() {
-        assertEquals(JElement.JObject(mapOf("a" to JElement.NumberLiteral(123),"b" to JElement.StringLiteral("xyz"))),  """{"a":123,"b":"xyz"}""".evaluate())
+        assertEquals(JElement.JObject(listOf( KeyValue("a", JElement.NumberLiteral(123)), KeyValue("b", JElement.StringLiteral("xyz")))),  """{"a":123,"b":"xyz"}""".evaluate())
     }
     @Test
     fun `evaluate a json string containing an object containing a number and an array`() {
-        assertEquals(JElement.JObject(mapOf("a" to JElement.NumberLiteral(123),"b" to JElement.JArray(listOf(JElement.StringLiteral("xyz"))))),  """{"a":123,"b":["xyz"]}""".evaluate())
+        assertEquals(JElement.JObject(listOf(KeyValue("a", JElement.NumberLiteral(123)), KeyValue("b",JElement.JArray(listOf(JElement.StringLiteral("xyz")))))),  """{"a":123,"b":["xyz"]}""".evaluate())
     }
     @Test
     fun `evaluate a json string containing an object containing a number and a object`() {
-        assertEquals(JElement.JObject(mapOf("a" to JElement.NumberLiteral(123),"b" to JElement.JObject(mapOf("c" to JElement.StringLiteral("xyz"))))),  """{"a":123,"b":{"c":"xyz"}}""".evaluate())
+        assertEquals(JElement.JObject(listOf(KeyValue("a", JElement.NumberLiteral(123)), KeyValue("b", JElement.JObject(listOf(KeyValue("c", JElement.StringLiteral("xyz"))))))),  """{"a":123,"b":{"c":"xyz"}}""".evaluate())
     }
     @Test
     fun `part two`() {
