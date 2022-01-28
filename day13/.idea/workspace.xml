@@ -214,6 +214,16 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -246,7 +256,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
   </component>
-  <component name="RunManager" selected="Gradle.MainTest.part two with puzzle input">
+  <component name="RunManager" selected="Gradle.MainTest">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -259,12 +269,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainTest.adding a guest to sample data" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;MainTest.adding a guest to sample data&quot;" />
+        <option name="scriptParameters" value="--tests &quot;MainTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -280,12 +290,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MainTest.combination" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="MainTest.adding a guest to sample data" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;MainTest.combination&quot;" />
+        <option name="scriptParameters" value="--tests &quot;MainTest.adding a guest to sample data&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -391,11 +401,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MainTest" />
         <item itemvalue="Gradle.MainTest.part two with puzzle input" />
         <item itemvalue="Gradle.MainTest.adding a guest to sample data" />
         <item itemvalue="Gradle.MainTest.part one with puzzle input" />
         <item itemvalue="Gradle.MainTest.part one with sample data" />
-        <item itemvalue="Gradle.MainTest.combination" />
       </list>
     </recent_temporary>
   </component>

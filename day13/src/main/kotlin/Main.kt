@@ -16,9 +16,9 @@ fun List<Guest>.updateLastGuest(newNeighbours:Map<String, Int> ):List<Guest> {
     return this
 }
 
-fun partOne(data:List<String>) = data.parse().guestCombinations()
+fun partOne(data:List<String>) = data.parse().bestGuestHappiness()
 
-fun List<Guest>.guestCombinations():Int {
+fun List<Guest>.bestGuestHappiness():Int {
     val guestCombinations = circularCombinations(size).map{ indexes -> indexes.map{ index -> this[index]} }
     return guestCombinations.map { it.sumClockwise().sum() + it.sumAntiClockwise().sum() }.maxOf { it }
 }
@@ -57,4 +57,4 @@ fun List<Guest>.addGuest(name:String):List<Guest> {
     return this + Guest(name, associate{Pair(it.name, 0)}.toMutableMap() )
 }
 
-fun partTwo(data:List<String>) = data.parse().addGuest("Mike").guestCombinations()
+fun partTwo(data:List<String>) = data.parse().addGuest("Mike").bestGuestHappiness()
