@@ -19,14 +19,20 @@ fun partOne(data:List<String>) = data.parse().bestGuestHappiness()
 
 fun List<Guest>.bestGuestHappiness():Int {
     val guestCombinations = circularCombinations(size).map{ indexes -> indexes.map{ index -> this[index]} }
-    return guestCombinations.map { it.sumClockwise().sum() + it.sumAntiClockwise().sum() }.maxOf { it }
+    return guestCombinations.map { it.sumClockwise().sum() + it.reversed().sumClockwise().sum() }.maxOf { it }
 }
+
 fun List<Guest>.sumClockwise() = mapIndexed{ index, guest ->
     if (index < size - 1) guest.neighbours.getValue(get(index + 1).name) else guest.neighbours.getValue(first().name )
 }
-fun List<Guest>.sumAntiClockwise() = mapIndexed{ index, guest ->
-    if (index > 0) guest.neighbours.getValue(get(index - 1).name) else guest.neighbours.getValue(last().name)
+
+//part two
+fun List<Guest>.addGuest(name:String):List<Guest> {
+    forEach{ guest -> guest.neighbours[name] = 0 }
+    return this + Guest(name, associate{Pair(it.name, 0)}.toMutableMap() )
 }
+
+fun partTwo(data:List<String>) = data.parse().addGuest("Mike").bestGuestHappiness()
 
 //circularCombinations creates every none repeating combination of integers but then only retains the combinations that start with a zero.
 //This because [0,1,2,3] is the same as [1,2,3,0], [2,3,0,1] and [3,0,1,2] if numbers are arranged in a circle
@@ -51,10 +57,3 @@ fun List<Int>.insert(number:Int, before:Int):List<Int> {
     }
     return result
 }
-
-fun List<Guest>.addGuest(name:String):List<Guest> {
-    forEach{ guest -> guest.neighbours[name] = 0 }
-    return this + Guest(name, associate{Pair(it.name, 0)}.toMutableMap() )
-}
-
-fun partTwo(data:List<String>) = data.parse().addGuest("Mike").bestGuestHappiness()
