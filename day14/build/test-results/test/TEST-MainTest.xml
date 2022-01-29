@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-01-29T12:33:01" hostname="MacBook-Pro-2" time="0.062">
+<testsuite name="MainTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2022-01-29T12:50:24" hostname="MacBook-Pro-2" time="0.055">
   <properties/>
-  <testcase name="winner after 1 second using sample data()" classname="MainTest" time="0.038"/>
+  <testcase name="winner after 1 second using sample data()" classname="MainTest" time="0.031"/>
   <testcase name="parsing sample data()" classname="MainTest" time="0.001"/>
-  <testcase name="distance travelled by dancer in 1000s is 1056()" classname="MainTest" time="0.001"/>
-  <testcase name="accumulated points after 1000 seconds using sample data()" classname="MainTest" time="0.007"/>
+  <testcase name="distance travelled by dancer in 1000s is 1056()" classname="MainTest" time="0.0"/>
+  <testcase name="accumulated points after 1000 seconds using sample data()" classname="MainTest" time="0.01"/>
   <testcase name="part two using sample data()" classname="MainTest" time="0.002"/>
-  <testcase name="distance travelled by comet in 1000s is 1120()" classname="MainTest" time="0.001"/>
+  <testcase name="distance travelled by comet in 1000s is 1120()" classname="MainTest" time="0.0"/>
   <testcase name="part one using puzzle input()" classname="MainTest" time="0.001"/>
   <testcase name="part one using sample data()" classname="MainTest" time="0.0"/>
   <testcase name="part two using puzzle input()" classname="MainTest" time="0.005"/>
