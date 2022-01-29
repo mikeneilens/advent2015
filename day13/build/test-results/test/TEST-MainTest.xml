@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-01-28T21:29:19" hostname="MacBook-Pro-2" time="0.359">
+<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-01-29T11:24:26" hostname="MacBook-Pro-2" time="0.417">
   <properties/>
-  <testcase name="combination()" classname="MainTest" time="0.034"/>
-  <testcase name="part one with puzzle input()" classname="MainTest" time="0.035"/>
+  <testcase name="creating a circular combination of size 3()" classname="MainTest" time="0.041"/>
+  <testcase name="part one with puzzle input()" classname="MainTest" time="0.046"/>
   <testcase name="parse data into Guests()" classname="MainTest" time="0.001"/>
-  <testcase name="adding a guest to sample data()" classname="MainTest" time="0.002"/>
+  <testcase name="adding a guest to sample data()" classname="MainTest" time="0.004"/>
   <testcase name="part one with sample data()" classname="MainTest" time="0.001"/>
-  <testcase name="part two with puzzle input()" classname="MainTest" time="0.285"/>
+  <testcase name="part two with puzzle input()" classname="MainTest" time="0.322"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

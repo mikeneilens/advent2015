@@ -1,20 +1,19 @@
 data class Guest(val name:String, val neighbours:MutableMap<String, Int>)
 
-fun List<String>.parse():List<Guest> = drop(1).fold(listOf(first().toGuest()),::updateGuests)
-
-fun String.toGuest() = Guest(
-    split(" ").first(),
-    mutableMapOf(split(" ").last().removeSuffix(".") to if (split(" ")[2] == "gain") split(" ")[3].toInt() else split(" ")[3].toInt() * -1 )
-)
-
-fun updateGuests(guests: List<Guest>, string: String) =
-    if (string.toGuest().name != guests.last().name) guests + string.toGuest()
-    else guests.updateLastGuest(string.toGuest().neighbours)
-
-fun List<Guest>.updateLastGuest(newNeighbours:Map<String, Int> ):List<Guest> {
-    last().neighbours.putAll(newNeighbours)
-    return this
+fun List<String>.parse():List<Guest> {
+    val guests = mutableListOf<Guest>()
+    forEach{line ->
+        val (name, neighbourName, happiness) = line.guestElements()
+        if (guests.isNotEmpty() && guests.last().name == name) guests.last().neighbours[neighbourName] = happiness
+        else guests.add(Guest(name, mutableMapOf(neighbourName to happiness)))
+    }
+    return guests
 }
+
+fun String.guestElements() = Triple(
+    split(" ").first(),
+    split(" ").last().removeSuffix("."),
+    if (split(" ")[2] == "gain") split(" ")[3].toInt() else split(" ")[3].toInt() * -1 )
 
 fun partOne(data:List<String>) = data.parse().bestGuestHappiness()
 
@@ -29,7 +28,8 @@ fun List<Guest>.sumAntiClockwise() = mapIndexed{ index, guest ->
     if (index > 0) guest.neighbours.getValue(get(index - 1).name) else guest.neighbours.getValue(last().name)
 }
 
-//circular creates every none repeating combination of integers but then only retains the combinations that start with a zero.
+//circularCombinations creates every none repeating combination of integers but then only retains the combinations that start with a zero.
+//This because [0,1,2,3] is the same as [1,2,3,0], [2,3,0,1] and [3,0,1,2] if numbers are arranged in a circle
 tailrec fun circularCombinations(size:Int, result:List<List<Int>> = listOf(listOf(0))):List<List<Int>> {
     if (result.isEmpty() && size==0 || result.first().size == size ) return result
     val newItem = result.first().size
