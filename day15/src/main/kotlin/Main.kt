@@ -3,23 +3,25 @@ data class Ingredient(val name:String, val capacity:Long, val durability:Long, v
 fun parse(data:List<String>) = data.map(String::toIngredient)
 
 fun String.toIngredient() = Ingredient(
-    split(" ")[0].dropLast(1),
-    split(" ")[2].dropLast(1).toLong(),
-    split(" ")[4].dropLast(1).toLong(),
-    split(" ")[6].dropLast(1).toLong(),
-    split(" ")[8].dropLast(1).toLong(),
-    split(" ")[10].toLong(),
+    name = split(" ")[0].dropLast(1),
+    capacity= split(" ")[2].dropLast(1).toLong(),
+    durability = split(" ")[4].dropLast(1).toLong(),
+    flavour =  split(" ")[6].dropLast(1).toLong(),
+    texture =  split(" ")[8].dropLast(1).toLong(),
+    calories =  split(" ")[10].toLong(),
 )
 
-fun List<Ingredient>.totalScore() = maxOf(sumOf{it.capacity * it.teaspoons},0) *
-        maxOf(sumOf{it.durability * it.teaspoons},0) *
-        maxOf(sumOf{it.flavour * it.teaspoons},0)  *
-        maxOf(sumOf{it.texture * it.teaspoons},0)
+fun List<Ingredient>.totalScore() = productOf(sumOf{it.capacity * it.teaspoons},sumOf{it.durability * it.teaspoons},sumOf{it.flavour * it.teaspoons},sumOf{it.texture * it.teaspoons} )
+
+fun productOf(vararg n:Long ) = n.fold(1L){ total, number -> total * maxOf(number,0) }
 
 fun List<Ingredient>.totalCalories() = sumOf{it.calories * it.teaspoons}
 
-fun findBestCombinationScore(data:List<String>, isBestCombinationRule:(List<Ingredient>, Long) -> Boolean ):Long {
-    val ingredients = parse(data)
+fun partOne(data:List<String>):Long = findBestCombinationScore(parse(data), ::isBestSoFarPartOne )
+
+fun partTwo(data:List<String>):Long = findBestCombinationScore(parse(data), ::isBestSoFarPartTwo )
+
+fun findBestCombinationScore(ingredients:List<Ingredient>, isBestCombinationRule:(List<Ingredient>, Long) -> Boolean ):Long {
     val combinations = combinationsOfNumbersAddingToATotal(100, ingredients.size)
     var bestTotalScore = 0L
     combinations.forEach { teaSpoonCombos ->

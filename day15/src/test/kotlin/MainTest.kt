@@ -34,11 +34,11 @@ class MainTest {
     }
     @Test
     fun `part one using sample data`() {
-        assertEquals(62842880L, findBestCombinationScore(sampleData, ::isBestSoFarPartOne))
+        assertEquals(62842880L, partOne(sampleData))
     }
     @Test
     fun `part one`() {
-        assertEquals(222870L, findBestCombinationScore(puzzleInput, ::isBestSoFarPartOne))
+        assertEquals(222870L, partOne(puzzleInput))
     }
 
     @Test
@@ -50,11 +50,11 @@ class MainTest {
     }
     @Test
     fun `part two using sample data`() {
-        assertEquals(57600000L, findBestCombinationScore(sampleData, ::isBestSoFarPartTwo))
+        assertEquals(57600000L, partTwo(sampleData))
     }
 
     @Test
     fun `part two`() {
-        assertEquals(117936L, findBestCombinationScore(puzzleInput, ::isBestSoFarPartTwo))
+        assertEquals(117936L, partTwo(puzzleInput))
     }
 }
