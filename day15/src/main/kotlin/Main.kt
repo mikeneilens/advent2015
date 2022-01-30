@@ -20,7 +20,7 @@ fun List<Ingredient>.totalCalories() = sumOf{it.calories * it.teaspoons}
 
 fun findBestCombinationScore(data:List<String>, isBestCombinationRule:(List<Ingredient>, Long) -> Boolean ):Long {
     val ingredients = parse(data)
-    val combinations = combinationsAddingToTotal(100, ingredients.size)
+    val combinations = combinationsOfNumbersAddingToATotal(100, ingredients.size)
     var bestTotalScore = 0L
     combinations.forEach { teaSpoonCombos ->
         teaSpoonCombos.forEachIndexed { index, teaspoons -> ingredients[index].teaspoons = teaspoons  }
@@ -33,24 +33,15 @@ fun isBestSoFarPartOne(ingredients: List<Ingredient>, bestTotalScore: Long) = in
 
 fun isBestSoFarPartTwo(ingredients: List<Ingredient>, bestTotalScore: Long) = ingredients.totalCalories() == 500L && ingredients.totalScore() > bestTotalScore
 
-//This is too big!
-fun combinationsAddingToTotal(total:Long, noOfNumbers:Int = 4  ):List<List<Long>> {
-    if (noOfNumbers == 1) return listOf(listOf(total))
-    val result = mutableListOf<List<Long>>()
-    (1L..total).forEach { i ->
-        if (noOfNumbers == 2) {if (i  < total) result.add(listOf(i, total - i))}
-        else {
-            (1L..(total - i )).forEach { j->
-                if (noOfNumbers == 3) {if (i + j < total) result.add(listOf(i, j, total - i, j))}
-                else {
-                    (1L..(total - i - j)).forEach { k->
-                        if (i + j + k  < total) result.add(listOf(i, j, k, total - i - j - k))
-                    }
-                }
-            }
-        }
-    }
-    return result
-}
+
+//e.g. if total is 5 and noOfNumbers is 2 then this returns [[1, 4], [2, 3], [3, 2], [4, 1]]
+// if total is 5 and noOfNumnres is 3 then this returns [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [3, 1, 1]]
+fun combinationsOfNumbersAddingToATotal(total:Long, noOfNumbers:Int):List<List<Long>> =
+    if (noOfNumbers == 1)  listOf(listOf(total))
+    else (1L until total).fold(listOf(listOf<Long>())){ listOfCombinations, i ->
+        val subCombinations = combinationsOfNumbersAddingToATotal(total - i, noOfNumbers - 1  )
+        listOfCombinations + subCombinations.map{ listOf(i) + it }
+    }.drop(1)
+
 
 
