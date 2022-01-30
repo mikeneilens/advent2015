@@ -20,7 +20,7 @@ fun List<Ingredient>.totalCalories() = sumOf{it.calories * it.teaspoons}
 
 fun findBestCombinationScore(data:List<String>, isBestCombinationRule:(List<Ingredient>, Long) -> Boolean ):Long {
     val ingredients = parse(data)
-    val combinations = variants(100, ingredients.size)
+    val combinations = combinationsAddingToTotal(100, ingredients.size)
     var bestTotalScore = 0L
     combinations.forEach { teaSpoonCombos ->
         teaSpoonCombos.forEachIndexed { index, teaspoons -> ingredients[index].teaspoons = teaspoons  }
@@ -34,14 +34,14 @@ fun isBestSoFarPartOne(ingredients: List<Ingredient>, bestTotalScore: Long) = in
 fun isBestSoFarPartTwo(ingredients: List<Ingredient>, bestTotalScore: Long) = ingredients.totalCalories() == 500L && ingredients.totalScore() > bestTotalScore
 
 //This is too big!
-fun variants(total:Long, size:Int = 4  ):List<List<Long>> {
-    if (size == 1) return listOf(listOf(total))
+fun combinationsAddingToTotal(total:Long, noOfNumbers:Int = 4  ):List<List<Long>> {
+    if (noOfNumbers == 1) return listOf(listOf(total))
     val result = mutableListOf<List<Long>>()
     (1L..total).forEach { i ->
-        if (size == 2) {if (i  < total) result.add(listOf(i, total - i))}
+        if (noOfNumbers == 2) {if (i  < total) result.add(listOf(i, total - i))}
         else {
             (1L..(total - i )).forEach { j->
-                if (size == 3) {if (i + j < total) result.add(listOf(i, j, total - i, j))}
+                if (noOfNumbers == 3) {if (i + j < total) result.add(listOf(i, j, total - i, j))}
                 else {
                     (1L..(total - i - j)).forEach { k->
                         if (i + j + k  < total) result.add(listOf(i, j, k, total - i - j - k))

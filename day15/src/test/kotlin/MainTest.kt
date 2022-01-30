@@ -28,7 +28,7 @@ class MainTest {
     }
     @Test
     fun `creating an array with all possible values adding to 100`() {
-        val combinations = variants(100)
+        val combinations = combinationsAddingToTotal(100)
         assertEquals(156849, combinations.size)
         assertTrue(combinations.all { it.sum() == 100L } )
     }

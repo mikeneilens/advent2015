@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-01-30T19:27:32" hostname="MacBook-Pro-2" time="0.163">
+<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-01-30T19:30:09" hostname="MacBook-Pro-2" time="0.164">
   <properties/>
-  <testcase name="total for 44 butterscotch and 56 cinnamon()" classname="MainTest" time="0.02"/>
-  <testcase name="part two using sample data()" classname="MainTest" time="0.015"/>
-  <testcase name="convert string to an ingredient()" classname="MainTest" time="0.001"/>
+  <testcase name="total for 44 butterscotch and 56 cinnamon()" classname="MainTest" time="0.021"/>
+  <testcase name="part two using sample data()" classname="MainTest" time="0.016"/>
+  <testcase name="convert string to an ingredient()" classname="MainTest" time="0.002"/>
   <testcase name="part one()" classname="MainTest" time="0.067"/>
-  <testcase name="part two()" classname="MainTest" time="0.038"/>
-  <testcase name="creating an array with all possible values adding to 100()" classname="MainTest" time="0.017"/>
+  <testcase name="part two()" classname="MainTest" time="0.037"/>
+  <testcase name="creating an array with all possible values adding to 100()" classname="MainTest" time="0.015"/>
   <testcase name="part one using sample data()" classname="MainTest" time="0.001"/>
-  <testcase name="total calories for 40 butterscotch and 60 cinnamon is 500()" classname="MainTest" time="0.0"/>
+  <testcase name="total calories for 40 butterscotch and 60 cinnamon is 500()" classname="MainTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
