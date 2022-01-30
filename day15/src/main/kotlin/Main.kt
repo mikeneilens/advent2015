@@ -37,7 +37,7 @@ fun isBestSoFarPartTwo(ingredients: List<Ingredient>, bestTotalScore: Long) = in
 
 
 //e.g. if total is 5 and noOfNumbers is 2 then this returns [[1, 4], [2, 3], [3, 2], [4, 1]]
-//     if total is 5 and noOfNumnres is 3 then this returns [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [3, 1, 1]]
+//     if total is 5 and noOfNumbers is 3 then this returns [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [3, 1, 1]]
 fun combinationsOfNumbersAddingToATotal(total:Long, noOfNumbers:Int):List<List<Long>> =
     if (noOfNumbers == 1)  listOf(listOf(total))
     else (1L until total).fold(listOf(listOf<Long>())){ listOfCombinations, i ->
