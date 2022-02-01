@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-02-01T23:15:57" hostname="MacBook-Pro-2" time="0.053">
+  <properties/>
+  <testcase name="if a sue does not match a ticker tape()" classname="MainTest" time="0.029"/>
+  <testcase name="parsing list of strings to compounds()" classname="MainTest" time="0.002"/>
+  <testcase name="parsing list of strings to list of sue()" classname="MainTest" time="0.003"/>
+  <testcase name="part one()" classname="MainTest" time="0.01"/>
+  <testcase name="part two()" classname="MainTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
