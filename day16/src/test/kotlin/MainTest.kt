@@ -37,7 +37,7 @@ class MainTest {
     }
     @Test
     fun `if a sue does not match a ticker tape`() {
-        val validationMap = tickerTapeData.toValidationMap()
+        val validationMap = tickerTapeData.toValidationRules()
         val sue1 = Sue(1, listOf(Compound("children",3),Compound("perfumes",1),Compound("goldfish",5)))
         assertTrue(sue1.isOK(validationMap))
         val sue2 = Sue(1, listOf(Compound("children",3),Compound("perfumes",1),Compound("goldfish",10)))

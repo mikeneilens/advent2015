@@ -1,21 +1,22 @@
 data class Compound(val name:String, val qty:Int)
 
-fun List<String>.toValidationMap(isPartTwo:Boolean = false):Map<String, (Compound) -> Boolean> {
-    val compoundMap = mutableMapOf<String, (Compound) -> Boolean>()
+fun List<String>.toValidationRules(isPartTwo:Boolean = false):Map<String, (Compound) -> Boolean> {
+    val validationRules = mutableMapOf<String, (Compound) -> Boolean>()
     forEach{ line ->
         val name = line.toCompoundName()
         val qty = line.toCompoundQty()
-        if (isPartTwo) {
-            when (name) {
-                "cats","trees" -> compoundMap[name] = {compound:Compound -> compound.qty > qty  }
-                "pomeranians","goldfish" -> compoundMap[name] = {compound:Compound -> compound.qty < qty  }
-                else ->  compoundMap[name] = {compound:Compound -> compound.qty == qty  }
-            }
-        }
-        else compoundMap[name] = {compound:Compound -> compound.qty == qty  }
+        validationRules[name] =  if (isPartTwo) rulesForPartTwo(name, qty) else rulesForPartOne(qty)
     }
-    return compoundMap
+    return validationRules
 }
+
+fun rulesForPartOne( qty: Int ) = { compound: Compound -> compound.qty == qty }
+
+fun rulesForPartTwo(name: String, qty: Int) = when (name) {
+        "cats", "trees" ->  { compound: Compound -> compound.qty > qty }
+        "pomeranians", "goldfish" ->  { compound: Compound -> compound.qty < qty }
+        else -> rulesForPartOne(qty)
+    }
 
 fun List<String>.toCompound():List<Compound> = map{Compound(it.toCompoundName(), it.toCompoundQty())}
 
@@ -33,12 +34,12 @@ fun String.toSueNumber() = removePrefix("Sue ").split(":")[0].toInt()
 fun String.toSueCompounds() = split(" ").drop(2).joinToString(" ").split(", ").toCompound()
 
 fun partOne(tickerTapeData:List<String>, data:List<String>):Int {
-    val validatorMap = tickerTapeData.toValidationMap()
+    val validatorMap = tickerTapeData.toValidationRules()
     return parseSue(data).filter{it.isOK(validatorMap)}.first().number
 }
 
 fun partTwo(tickerTapeData:List<String>, data:List<String>):Int {
-    val validatorMap = tickerTapeData.toValidationMap(isPartTwo = true)
+    val validatorMap = tickerTapeData.toValidationRules(isPartTwo = true)
     return parseSue(data).filter{it.isOK(validatorMap)}.first().number
 
 }
