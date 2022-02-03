@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-02-03T21:12:10" hostname="MacBook-Pro-2" time="1.304">
+  <properties/>
+  <testcase name="part two using sample data()" classname="MainTest" time="0.029"/>
+  <testcase name="part one using puzzle input()" classname="MainTest" time="0.804"/>
+  <testcase name="part one using sample data()" classname="MainTest" time="0.001"/>
+  <testcase name="part two using puzzle input()" classname="MainTest" time="0.468"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
