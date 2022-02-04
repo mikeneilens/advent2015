@@ -10,21 +10,19 @@ data class Position(val x:Int, val y:Int) {
             }
         }
 
-    fun isCornerPosition(max: Int) =
-        (x == 0 && y == 0) || (x == max && y == max) || (x == 0 && y == max) || (x == max && y == 0)
+    fun isCornerPosition(max: Int) = (x == 0 && y == 0) || (x == max && y == max) || (x == 0 && y == max) || (x == max && y == 0)
 
 }
 
 typealias LightMap = Map<Position, Light>
 
 fun LightMap.toStrings(max:Int) = (0..max).map {y ->
-    (0..max).map{x -> getValue(Position(x,y)).text }.joinToString("")
-}
+    (0..max).map{x -> getValue(Position(x,y)).text }.joinToString("") }
 
-fun parse(data:List<String>):LightMap =
-    data.flatMapIndexed {y, line ->
-        line.mapIndexed { x, char -> Pair(Position(x,y), char.toLight()) }
-    }.toMap()
+fun parse(data:List<String>) =
+    data.flatMapIndexed {y, string -> string.mapIndexed { x, char -> toLight(x, y, char) } }.toMap()
+
+fun toLight(x:Int, y:Int, char:Char) = Pair(Position(x, y), char.toLight())
 
 fun LightMap.statusCalculatorPartOne(position:Position, max:Int) = when(getValue(position)) {
     Light.On -> if ( position.surroundingPositions(max).count{ getValue(it) == Light.On} in 2..3 ) Pair(position, Light.On) else Pair(position, Light.Off)
