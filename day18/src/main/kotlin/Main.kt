@@ -20,9 +20,9 @@ fun LightMap.toStrings(max:Int) = (0..max).map {y ->
     (0..max).map{x -> getValue(Position(x,y)).text }.joinToString("") }
 
 fun parse(data:List<String>) =
-    data.flatMapIndexed {y, string -> string.mapIndexed { x, char -> toLight(x, y, char) } }.toMap()
+    data.flatMapIndexed {y, string -> string.mapIndexed { x, char -> char.toLight(x, y) } }.toMap()
 
-fun toLight(x:Int, y:Int, char:Char) = Pair(Position(x, y), char.toLight())
+fun Char.toLight(x:Int, y:Int) = Pair(Position(x, y), toLight())
 
 fun LightMap.statusCalculatorPartOne(position:Position, max:Int) = when(getValue(position)) {
     Light.On -> if ( position.surroundingPositions(max).count{ getValue(it) == Light.On} in 2..3 ) Pair(position, Light.On) else Pair(position, Light.Off)
