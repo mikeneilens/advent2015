@@ -24,14 +24,14 @@ fun parse(data:List<String>) =
 
 fun Char.toLight(x:Int, y:Int) = Pair(Position(x, y), toLight())
 
+typealias StatusCalculator = LightMap.(Position, Int) -> Pair<Position,Light>
+
 fun LightMap.statusCalculatorPartOne(position:Position, max:Int) = when(getValue(position)) {
     Light.On -> if ( position.surroundingPositions(max).count{ getValue(it) == Light.On} in 2..3 ) Pair(position, Light.On) else Pair(position, Light.Off)
     Light.Off -> if ( position.surroundingPositions(max).count{ getValue(it) == Light.On} ==  3 ) Pair(position, Light.On) else Pair(position, Light.Off)
 }
 
-typealias StatusCalculator = LightMap.(Position, Int) -> Pair<Position,Light>
-
-fun LightMap.newLightMap(max:Int, statusUpdater:StatusCalculator) = map{ statusUpdater(it.key, max) }.toMap()
+fun LightMap.newLightMap(max:Int, statusCalculator:StatusCalculator) = map{ statusCalculator(it.key, max) }.toMap()
 
 fun partOne(data:List<String>, steps:Int, statusUpdater:StatusCalculator = LightMap::statusCalculatorPartOne ):Int {
     val max = data.first().lastIndex

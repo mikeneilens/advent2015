@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-04T22:21:09" hostname="MacBook-Pro-2" time="1.138">
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-05T10:41:06" hostname="MacBook-Pro-2" time="1.109">
   <properties/>
-  <testcase name="surrounding positions()" classname="MainTest" time="0.038"/>
-  <testcase name="parse data into a lightMap()" classname="MainTest" time="0.008"/>
+  <testcase name="surrounding positions()" classname="MainTest" time="0.034"/>
+  <testcase name="parse data into a lightMap()" classname="MainTest" time="0.007"/>
   <testcase name="after step 1()" classname="MainTest" time="0.005"/>
-  <testcase name="after step 4()" classname="MainTest" time="0.004"/>
-  <testcase name="part one using puzzle input()" classname="MainTest" time="0.631"/>
+  <testcase name="after step 4()" classname="MainTest" time="0.005"/>
+  <testcase name="part one using puzzle input()" classname="MainTest" time="0.625"/>
   <testcase name="part one using sample data()" classname="MainTest" time="0.001"/>
-  <testcase name="part two using puzzle input()" classname="MainTest" time="0.45"/>
+  <testcase name="part two using puzzle input()" classname="MainTest" time="0.431"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
