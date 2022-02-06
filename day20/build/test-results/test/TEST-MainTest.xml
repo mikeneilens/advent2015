@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-06T18:29:59" hostname="MacBook-Pro-2" time="4.597">
+  <properties/>
+  <testcase name="calcualting presents for houses()" classname="MainTest" time="0.025"/>
+  <testcase name="elf two can deliver 2 times 10 presents to house 100 and also house 102()" classname="MainTest" time="0.001"/>
+  <testcase name="lowest housenuber for 120 presents()" classname="MainTest" time="0.001"/>
+  <testcase name="calculate factors of 100()" classname="MainTest" time="0.035"/>
+  <testcase name="elf two can deliver 2 times 11 presents to house 100 but not house 102()" classname="MainTest" time="0.001"/>
+  <testcase name="part one()" classname="MainTest" time="2.188"/>
+  <testcase name="part two()" classname="MainTest" time="2.343"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
