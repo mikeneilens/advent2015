@@ -1,10 +1,7 @@
 import kotlin.math.sqrt
 
-fun calcPresents(houseNumber:Int, presentRule:(Int, Int, Int)->Int ):Int {
-    val factors = calcFactors(houseNumber)
-    val rule = {total:Int, factor:Int -> presentRule(total, factor, houseNumber)}
-    return factors.fold(0,rule)
-}
+fun calcPresents(houseNumber:Int, presentRule:(Int, Int, Int)->Int ):Int =
+    calcFactors(houseNumber).fold(0){total:Int, factor:Int -> presentRule(total, factor, houseNumber)}
 
 val partOneRule = {total:Int, elf:Int, _:Int -> total + elf * 10}
 
@@ -14,9 +11,9 @@ fun partOne(presentsNeeded:Int, presentRule:(Int,Int,Int)->Int = partOneRule ):I
     return houseNumber
 }
 
-fun partTwoRule(total:Int, elf:Int, houseNumber: Int) = if (houseNumber > elf * 50) total else total + 11 * elf
+val partTwoRule = {total:Int, elf:Int, houseNumber: Int -> if (houseNumber > elf * 50) total else total + 11 * elf}
 
-fun partTwo(presentsNeeded:Int) = partOne(presentsNeeded, ::partTwoRule)
+fun partTwo(presentsNeeded:Int) = partOne(presentsNeeded, partTwoRule)
 
 //Not sure if this is the most efficient way to determine all factors of an integer!
 fun calcFactors(n: Int):Set<Int> {
