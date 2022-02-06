@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-06T12:07:38" hostname="MacBook-Pro-2" time="0.163">
+  <properties/>
+  <testcase name="finding new molecules after 1 replacement of HOH()" classname="MainTest" time="0.024"/>
+  <testcase name="inserting text into molecule to create a new molecule()" classname="MainTest" time="0.002"/>
+  <testcase name="parseing sample data into replacements()" classname="MainTest" time="0.003"/>
+  <testcase name="part two using sample data()" classname="MainTest" time="0.023"/>
+  <testcase name="part one using puzzle input()" classname="MainTest" time="0.005"/>
+  <testcase name="part one using sample data()" classname="MainTest" time="0.0"/>
+  <testcase name="part two using puzzle input()" classname="MainTest" time="0.1"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
