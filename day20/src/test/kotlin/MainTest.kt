@@ -14,12 +14,12 @@ class MainTest {
         assertEquals(1020, partOneRule(1000,2,102))
     }
     @Test
-    fun `calcualting presents for houses`() {
+    fun `calculating presents for houses`() {
         assertEquals(10, calcPresents(1, partOneRule))
         assertEquals(70, calcPresents(4, partOneRule))
     }
     @Test
-    fun `lowest housenuber for 120 presents`() {
+    fun `lowest house number for 120 presents`() {
         assertEquals(6, partOne(120))
     }
     @Test
