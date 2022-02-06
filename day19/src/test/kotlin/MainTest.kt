@@ -49,6 +49,11 @@ class MainTest {
         O => HH
     """.trimIndent().split("\n")
     @Test
+    fun `reversing a replacement`() {
+        val replacement = Replacement("H".toList(), "OH")
+        assertEquals(Replacement("OH".toList(), "H"), replacement.reverse())
+    }
+    @Test
     fun `part two using sample data`() {
         assertEquals(3, partTwo(sampleDataPartTwo, "HOH"))
         assertEquals(6, partTwo(sampleDataPartTwo, "HOHOHO"))
