@@ -74,10 +74,27 @@ class MainTest {
     }
     @Test
     fun `playing a game where player has 5 damage and 5 armour and boss has 7 damage and 2 armour `() {
-        assertEquals(ResultOfGame.playerWins, playGame(Contestant(5,5,8), Contestant(7,2,12)))
+        val boss = Contestant(7,2,12, )
+        val player = Contestant(5,5,8)
+        assertEquals(ResultOfGame.PlayerWins, playGame(player, boss))
     }
     @Test
     fun `part one`() {
-        assertEquals(111, partOne(weaponsData,armorData,ringsData,100, Contestant(8,2,109)))
+        val boss = Contestant(8,2,109 )
+        assertEquals(111, partOne(weaponsData,armorData,ringsData,100, boss))
+    }
+
+    @Test
+    fun `permuations that contain unique digits in any sequence`() {
+        assertEquals(setOf(setOf(0)), permutations(0))
+        assertEquals(setOf(setOf(0),setOf(0,1)), permutations(1))
+        assertEquals(setOf(setOf(0),setOf(0,1),setOf(0,2),setOf(0,1,2)), permutations(2))
+        assertEquals(setOf(setOf(0),setOf(0,1),setOf(0,2),setOf(0,1,2),setOf(0,3),setOf(0,1,3),setOf(0,2,3),setOf(0,1,2,3)), permutations(3))
+        assertEquals(32768, permutations(15).size)
+    }
+    @Test
+    fun `part two`() {
+        val boss = Contestant(8,2,109 )
+        assertEquals(188, partTwo(weaponsData, armorData, ringsData.drop(2), 100,  boss ))
     }
 }

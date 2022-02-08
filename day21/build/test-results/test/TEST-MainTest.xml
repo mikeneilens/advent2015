@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-02-07T20:13:53" hostname="MacBook-Pro-2" time="0.057">
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-08T19:29:33" hostname="MacBook-Pro-2" time="1.531">
   <properties/>
-  <testcase name="playing a game where player has 5 damage and 5 armour and boss has 7 damage and 2 armour ()" classname="MainTest" time="0.02"/>
-  <testcase name="remove lists of equipment where last two items are the same()" classname="MainTest" time="0.022"/>
+  <testcase name="playing a game where player has 5 damage and 5 armour and boss has 7 damage and 2 armour ()" classname="MainTest" time="0.019"/>
+  <testcase name="remove lists of equipment where last two items are the same()" classname="MainTest" time="0.021"/>
+  <testcase name="permuations that contain unique digits in any sequence()" classname="MainTest" time="0.774"/>
   <testcase name="parsing equipment data()" classname="MainTest" time="0.001"/>
   <testcase name="adding a list of equipment to another list of equipment()" classname="MainTest" time="0.001"/>
-  <testcase name="part one()" classname="MainTest" time="0.01"/>
+  <testcase name="part one()" classname="MainTest" time="0.016"/>
+  <testcase name="part two()" classname="MainTest" time="0.696"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
