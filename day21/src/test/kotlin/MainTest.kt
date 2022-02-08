@@ -79,6 +79,19 @@ class MainTest {
         assertEquals(ResultOfGame.PlayerWins, playGame(player, boss))
     }
     @Test
+    fun `playing a game where boss has 5 damage and 5 armour and player has 7 damage and 2 armour `() {
+        val player = Contestant(7,2,12, )
+        val boss = Contestant(5,5,9)
+        assertEquals(ResultOfGame.BossWins, playGame(player, boss))
+    }
+    @Test
+    fun `playing a game where damage and armour cancel each other out `() {
+        val boss = Contestant(4,4,12, )
+        val player = Contestant(4,4,8)
+        assertEquals(ResultOfGame.Draw, playGame(player, boss))
+    }
+
+    @Test
     fun `part one`() {
         val boss = Contestant(8,2,109 )
         assertEquals(111, partOne(weaponsData,armorData,ringsData,100, boss))
