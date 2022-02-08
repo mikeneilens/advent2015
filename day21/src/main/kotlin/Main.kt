@@ -43,6 +43,6 @@ fun mostExpensiveWayToLose(equipmentList:List<Equipment>, playerHitPoints: Int, 
         .filter{ player -> playGame(player, boss) ==  ResultOfGame.BossWins }
         .maxOf{it.equipmentCost}
 
-fun permutations(max:Int, n:Int = 1, l:Set<Set<Int>> = setOf(setOf(0))):Set<Set<Int>> =
-    if (n > max)  l else permutations(max, n + 1, l + l.map{it + n})
+fun permutations(max:Int, n:Int = 1, set:Set<Set<Int>> = setOf(setOf(0))):Set<Set<Int>> =
+    if (n > max)  set else permutations(max, n + 1, set + set.map{it + n})
 
