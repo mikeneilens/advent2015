@@ -14,7 +14,8 @@ fun List<Equipment>.armour() = sumOf{it.armour}
 fun List<Equipment>.cost() = sumOf{it.cost}
 
 data class Contestant(val damage:Int, val armour:Int, val hitPoints:Int, val equipmentCost:Int = 0) {
-    operator fun minus(other:Contestant) = Contestant(damage, armour, hitPoints - maxOf(other.damage, 1) + armour, equipmentCost)
+    operator fun minus(other:Contestant) = if (armour >= other.damage) Contestant(damage, armour, hitPoints - 1) else
+        Contestant(damage, armour, hitPoints - other.damage + armour, equipmentCost)
 }
 
 enum class ResultOfGame{PlayerWins, BossWins, Draw}
@@ -39,10 +40,15 @@ fun partTwo(weaponsData: List<String>, armourData:List<String>, ringsData:List<S
     mostExpensiveWayToLose((weaponsData +  armourData + ringsData).parse(),playerHitPoints, boss)
 
 fun mostExpensiveWayToLose(equipmentList:List<Equipment>, playerHitPoints: Int, boss: Contestant) =
-    permutations(equipmentList.lastIndex).map{ permutation -> createPlayer( permutation.map{ equipmentList[it]}, playerHitPoints)}
+    permutations(equipmentList.lastIndex)
+        .filter(::permutationContainsAtLeastOneWeapon)
+        .map{ permutation -> createPlayer( permutation.map{ equipmentList[it]}, playerHitPoints)}
         .filter{ player -> playGame(player, boss) ==  ResultOfGame.BossWins }
         .maxOf{it.equipmentCost}
 
-fun permutations(max:Int, n:Int = 1, set:Set<Set<Int>> = setOf(setOf(0))):Set<Set<Int>> =
-    if (n > max)  set else permutations(max, n + 1, set + set.map{it + n})
+fun permutationContainsAtLeastOneWeapon(permutation:Set<Int>, indicesOfWeapons:List<Int> = listOf(0,1,2,3,4)) = indicesOfWeapons.any{it in permutation}
+
+//all non-repeating permutations. e.g. contains (0,1,2) but not (0,2,1) or (1,2,0) or (2,1,0) as they are the same
+fun permutations(max:Int, n:Int = 0, set:Set<Set<Int>> = setOf(setOf())):Set<Set<Int>> =
+    if (n == max)  set else permutations(max, n + 1, set + set.map{it + n})
 

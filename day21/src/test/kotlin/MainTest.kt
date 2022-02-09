@@ -9,7 +9,7 @@ class MainTest {
         Longsword    40     7       0
         Greataxe     74     8       0
     """.trimIndent().split("\n")
-    val armorData = """
+    val armourData = """
         Leather      13     0       1
         Chainmail    31     0       2
         Splintmail   53     0       3
@@ -85,29 +85,22 @@ class MainTest {
         assertEquals(ResultOfGame.BossWins, playGame(player, boss))
     }
     @Test
-    fun `playing a game where damage and armour cancel each other out `() {
-        val boss = Contestant(4,4,12, )
-        val player = Contestant(4,4,8)
-        assertEquals(ResultOfGame.Draw, playGame(player, boss))
-    }
-
-    @Test
     fun `part one`() {
         val boss = Contestant(8,2,109 )
-        assertEquals(111, partOne(weaponsData,armorData,ringsData,100, boss))
+        assertEquals(111, partOne(weaponsData,armourData,ringsData,100, boss))
     }
 
     @Test
     fun `permuations that contain unique digits in any sequence`() {
-        assertEquals(setOf(setOf(0)), permutations(0))
-        assertEquals(setOf(setOf(0),setOf(0,1)), permutations(1))
-        assertEquals(setOf(setOf(0),setOf(0,1),setOf(0,2),setOf(0,1,2)), permutations(2))
-        assertEquals(setOf(setOf(0),setOf(0,1),setOf(0,2),setOf(0,1,2),setOf(0,3),setOf(0,1,3),setOf(0,2,3),setOf(0,1,2,3)), permutations(3))
+        assertEquals(setOf(setOf<Int>()), permutations(0))
+        assertEquals(setOf(setOf(),setOf(0)), permutations(1))
+        assertEquals(setOf(setOf(),setOf(0),setOf(1),setOf(0,1)), permutations(2))
+        assertEquals(setOf(setOf(),setOf(0),setOf(1),setOf(0,1),setOf(2),setOf(0,2),setOf(1,2),setOf(0,1,2)), permutations(3))
         assertEquals(32768, permutations(15).size)
     }
     @Test
     fun `part two`() {
         val boss = Contestant(8,2,109 )
-        assertEquals(188, partTwo(weaponsData, armorData, ringsData.drop(2), 100,  boss ))
+        assertEquals(188, partTwo(weaponsData, armourData, ringsData.drop(2), 100,  boss ))
     }
 }
