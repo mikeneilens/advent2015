@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-02-09T18:40:35" hostname="MacBook-Pro-2" time="2.408">
+<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-02-09T19:04:17" hostname="MacBook-Pro-2" time="2.419">
   <properties/>
   <testcase name="playing a game where player has 5 damage and 5 armour and boss has 7 damage and 2 armour ()" classname="MainTest" time="0.019"/>
   <testcase name="remove lists of equipment where last two items are the same()" classname="MainTest" time="0.021"/>
-  <testcase name="permuations that contain unique digits in any sequence()" classname="MainTest" time="1.156"/>
+  <testcase name="permuations that contain unique digits in any sequence()" classname="MainTest" time="1.157"/>
   <testcase name="parsing equipment data()" classname="MainTest" time="0.001"/>
-  <testcase name="playing a game where boss has 5 damage and 5 armour and player has 7 damage and 2 armour ()" classname="MainTest" time="0.0"/>
-  <testcase name="adding a list of equipment to another list of equipment()" classname="MainTest" time="0.0"/>
+  <testcase name="playing a game where boss has 5 damage and 5 armour and player has 7 damage and 2 armour ()" classname="MainTest" time="0.001"/>
+  <testcase name="adding a list of equipment to another list of equipment()" classname="MainTest" time="0.001"/>
   <testcase name="part one()" classname="MainTest" time="0.009"/>
-  <testcase name="part two()" classname="MainTest" time="1.198"/>
+  <testcase name="part two()" classname="MainTest" time="1.209"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

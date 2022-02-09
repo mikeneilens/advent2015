@@ -46,7 +46,7 @@ fun mostExpensiveWayToLose(equipmentList:List<Equipment>, playerHitPoints: Int, 
         .filter{ player -> playGame(player, boss) ==  ResultOfGame.BossWins }
         .maxOf{it.equipmentCost}
 
-fun permutationContainsAtLeastOneWeapon(permutation:Set<Int>, indicesOfWeapons:List<Int> = listOf(0,1,2,3,4)) = indicesOfWeapons.any{it in permutation}
+fun permutationContainsAtLeastOneWeapon(permutation:Set<Int>, indicesOfWeapons:IntRange = 0..4) = indicesOfWeapons.any{it in permutation}
 
 //all non-repeating permutations. e.g. contains (0,1,2) but not (0,2,1) or (1,2,0) or (2,1,0) as they are the same
 fun permutations(max:Int, n:Int = 0, set:Set<Set<Int>> = setOf(setOf())):Set<Set<Int>> =
