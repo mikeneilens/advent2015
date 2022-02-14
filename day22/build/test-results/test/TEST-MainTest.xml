@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-02-14T11:32:39" hostname="MacBook-Pro-2" time="0.735">
+  <properties/>
+  <testcase name="casting recharge()" classname="MainTest" time="0.045"/>
+  <testcase name="casting magic missile()" classname="MainTest" time="0.001"/>
+  <testcase name="casting drain()" classname="MainTest" time="0.0"/>
+  <testcase name="playing a game from second example()" classname="MainTest" time="0.005"/>
+  <testcase name="casting poison()" classname="MainTest" time="0.001"/>
+  <testcase name="casting shield()" classname="MainTest" time="0.0"/>
+  <testcase name="playing a game from first example()" classname="MainTest" time="0.001"/>
+  <testcase name="part Two()" classname="MainTest" time="0.125"/>
+  <testcase name="part one()" classname="MainTest" time="0.555"/>
+  <system-out><![CDATA[Player wins hit point:1 boss hit points:-1  spells:  Recharge Shield Drain PoisonMagicMissile
+Player wins hit point:2 boss hit points:0  spells:  PoisonMagicMissile
+Player wins hit point:2 boss hit points:-1  spells:  Poison Recharge Shield Poison Recharge Shield Poison MagicMissileMagicMissile
+Player wins hit point:1 boss hit points:4  spells:  Poison MagicMissile Recharge Poison Shield Recharge Poison DrainMagicMissile
+Player wins hit point:3 boss hit points:-1  spells:  Poison MagicMissile Recharge Poison Shield Recharge Poison DrainDrain
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
