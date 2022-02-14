@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-14T21:47:30" hostname="MacBook-Pro-2" time="0.056">
+  <properties/>
+  <testcase name="jie r, offset is like jmp, but only jumps if register r is even()" classname="MainTest" time="0.05"/>
+  <testcase name="inc r increments register r, adding 1 to it, then continues with the next instruction()" classname="MainTest" time="0.001"/>
+  <testcase name="jmp offset is a jump, it continues with the instruction offset away relative to itself()" classname="MainTest" time="0.001"/>
+  <testcase name="tpl r sets register r to triple its current value, then continues with the next instruction()" classname="MainTest" time="0.001"/>
+  <testcase name="jio r, offset is like jmp, but only jumps if register r is 1()" classname="MainTest" time="0.001"/>
+  <testcase name="hlf r sets register r to half its current value, then continues with the next instruction()" classname="MainTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
