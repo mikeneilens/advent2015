@@ -76,7 +76,7 @@ fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText
     val spellCost = spellsCast.sumOf { it.cost }
     val statusBeforePlayersTurn = gameStatus.applyEffectBeforeTurn()
 
-    if (statusBeforePlayersTurn.bossHasLost() ) return playerHasWon( spellCost, gameInfo, spellsCast)
+    if (statusBeforePlayersTurn.bossHasLost() ) return playerHasWon( gameInfo, spellsCast)
     if (statusBeforePlayersTurn.playerHasLost()) return listOf() // boss has won
 
     val possibleSpells = Spell.allTypes.filter{statusBeforePlayersTurn.mana >= it.cost  && it.name !in statusBeforePlayersTurn.currentSpells.map{ spell -> spell.name} && spellCost + it.cost < gameInfo.minSpellCost}
@@ -91,7 +91,7 @@ fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText
 
         when {
             statusAfterPlayersTurn.bossHasLost() || statusBeforeBossesTurn.bossHasLost() ->
-                playerHasWon( spellCost + newSpell.cost, gameInfo, spellsCast + newSpell)
+                playerHasWon( gameInfo, spellsCast + newSpell)
             statusBeforeBossesTurn.playerHasLost() || statusAfterBossesTurn.playerHasLost() ->
                 listOf()
             else ->
@@ -100,8 +100,9 @@ fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText
     }
 }
 
-fun playerHasWon(spellCost: Int, scoreCard: GameInfo, spellsCast: List<Spell>): List<List<Spell>> {
-    if (spellCost < scoreCard.minSpellCost) scoreCard.minSpellCost = spellCost
+fun playerHasWon(gameInfo: GameInfo, spellsCast: List<Spell>): List<List<Spell>> {
+    val spellCost = spellsCast.sumOf { it.cost }
+    if (spellCost < gameInfo.minSpellCost) gameInfo.minSpellCost = spellCost
     return listOf(spellsCast)
 }
 
