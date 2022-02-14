@@ -8,7 +8,7 @@ enum class SpellName(val cost:Int, val life:Int){
     Shield(113,6),
     Poison(173,6),
     Recharge(229,5),
-    PartTwoSpell(9999,9999) //too expensive to buy and it never runs out.
+    PartTwoSpell(99999,99999) //too expensive to buy and it never runs out.
 }
 
 data class Spell(val name:SpellName, val lifeLeft:Int = name.life, val cost:Int  = name.cost) {
@@ -21,13 +21,10 @@ fun Boss.applyEffectBeforeTurn(spells:List<Spell>):Boss =
     if (spells.any{it.name == SpellName.Poison}) Boss(damage, hitPoints - 3) else Boss(damage, hitPoints)
 
 fun Player.applyEffectBeforeTurn(spells:List<Spell>):Player {
-    var armour = 0
-    var mana = this.mana
-    var hitPoints = this.hitPoints
-    if (spells.any{it.name == SpellName.Shield}) armour = 7
-    if (spells.any{it.name == SpellName.Recharge}) mana += 101
-    if (spells.any{it.name == SpellName.PartTwoSpell}) hitPoints -= 1
-    return Player(armour, hitPoints, mana)
+    val updatedArmour = if (spells.any{it.name == SpellName.Shield}) 7 else 0
+    val updatedMana = if (spells.any{it.name == SpellName.Recharge}) this.mana + 101 else this.mana
+    val updatedHitPoints =  if (spells.any{it.name == SpellName.PartTwoSpell}) this.hitPoints - 1 else this.hitPoints
+    return Player(updatedArmour, updatedHitPoints, updatedMana)
 }
 
 fun List<Spell>.update() = fold(listOf<Spell>()){ newSpells, spell ->
