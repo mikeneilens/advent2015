@@ -26,12 +26,10 @@ class MainTest {
         val player = Player(0,150,20)
         val boss = Boss(8,50)
         val spell = Spell(SpellName.Shield, 6)
-        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(
-            isHard = false
-        )
+        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(GameInfo())
         assertEquals(boss, updatedBoss)
         assertEquals(7, updatedPlayer.armour)
-        assertEquals(5, updatedSpells.first().life)
+        assertEquals(5, updatedSpells.first().lifeLeft)
     }
 
     @Test
@@ -39,12 +37,10 @@ class MainTest {
         val player = Player(0,150,20)
         val boss = Boss(8,50)
         val spell = Spell(SpellName.Poison, 6)
-        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(
-            isHard = false
-        )
+        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(GameInfo())
         assertEquals(player, updatedPlayer)
         assertEquals(boss.hitPoints - 3, updatedBoss.hitPoints)
-        assertEquals(5, updatedSpells.first().life)
+        assertEquals(5, updatedSpells.first().lifeLeft)
     }
 
     @Test
@@ -52,12 +48,10 @@ class MainTest {
         val spell = Spell(SpellName.Recharge, 6)
         val player = Player(0,150,20)
         val boss = Boss(8,50)
-        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(
-            isHard = false
-        )
+        val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn(GameInfo())
         assertEquals(boss, updatedBoss)
         assertEquals(player.mana + 101, updatedPlayer.mana)
-        assertEquals(5, updatedSpells.first().life)
+        assertEquals(5, updatedSpells.first().lifeLeft)
     }
 
     @Test
