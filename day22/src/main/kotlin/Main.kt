@@ -7,7 +7,9 @@ enum class SpellName(val cost:Int, val life:Int){
     Drain(73,0),
     Shield(113,6),
     Poison(173,6),
-    Recharge(229,5)}
+    Recharge(229,5),
+    PartTwoSpell(9999,9999) //too expensive to buy and it never runs out.
+}
 
 data class Spell(val name:SpellName, val lifeLeft:Int = name.life, val cost:Int  = name.cost) {
     companion object {
@@ -18,12 +20,14 @@ data class Spell(val name:SpellName, val lifeLeft:Int = name.life, val cost:Int 
 fun Boss.applyEffectBeforeTurn(spells:List<Spell>):Boss =
     if (spells.any{it.name == SpellName.Poison}) Boss(damage, hitPoints - 3) else Boss(damage, hitPoints)
 
-fun Player.applyEffectBeforeTurn(spells:List<Spell>, isHard:Boolean = false):Player {
+fun Player.applyEffectBeforeTurn(spells:List<Spell>):Player {
     var armour = 0
     var mana = this.mana
+    var hitPoints = this.hitPoints
     if (spells.any{it.name == SpellName.Shield}) armour = 7
     if (spells.any{it.name == SpellName.Recharge}) mana += 101
-    return Player(armour, hitPoints - (if (isHard) 1 else 0), mana)
+    if (spells.any{it.name == SpellName.PartTwoSpell}) hitPoints -= 1
+    return Player(armour, hitPoints, mana)
 }
 
 fun List<Spell>.update() = fold(listOf<Spell>()){ newSpells, spell ->
@@ -32,9 +36,9 @@ fun List<Spell>.update() = fold(listOf<Spell>()){ newSpells, spell ->
 
 data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<Spell> = listOf(), val mana:Int = player.mana ) {
 
-    fun applyEffectBeforeTurn(gameInfo:GameInfo):GameStatus {
+    fun applyEffectBeforeTurn():GameStatus {
         val updatedBoss = boss.applyEffectBeforeTurn(currentSpells)
-        val updatePlayer = player.applyEffectBeforeTurn(currentSpells, gameInfo.isHard)
+        val updatePlayer = player.applyEffectBeforeTurn(currentSpells)
         val updatedSpells = currentSpells.update()
         return GameStatus(updatePlayer, updatedBoss, updatedSpells)
     }
@@ -68,12 +72,12 @@ data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<S
     fun playerHasLost() = player.hitPoints <= 0
 
 }
-data class GameInfo(var minSpellCost:Int = Int.MAX_VALUE, val isHard:Boolean = false)
+data class GameInfo(var minSpellCost:Int = Int.MAX_VALUE)
 
 fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText:String = "", gameInfo:GameInfo = GameInfo()):List<List<Spell>> {
 
     val spellCost = spellsCast.sumOf { it.cost }
-    val statusBeforePlayersTurn = gameStatus.applyEffectBeforeTurn(gameInfo)
+    val statusBeforePlayersTurn = gameStatus.applyEffectBeforeTurn()
 
     if (statusBeforePlayersTurn.bossHasLost() ) return playerHasWon( spellCost, gameInfo, spellsCast)
     if (statusBeforePlayersTurn.playerHasLost()) return listOf() // boss has won
@@ -85,7 +89,7 @@ fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText
             .addSpellAndDeductCost(newSpell)
             .applyInstantEffects()
 
-        val statusBeforeBossesTurn = statusAfterPlayersTurn.applyEffectBeforeTurn(gameInfo)
+        val statusBeforeBossesTurn = statusAfterPlayersTurn.applyEffectBeforeTurn()
         val statusAfterBossesTurn = statusBeforeBossesTurn.attackPlayer()
 
         when {
@@ -109,7 +113,8 @@ fun partOne(player:Player, boss:Boss):Int {
     return  result.minOf{ it.sumOf {spell -> spell.cost } }
 }
 
+//include a never ending spell which always deducts one from hit points
 fun partTwo(player:Player, boss:Boss):Int {
-    val result = playTurn(GameStatus(player,boss), gameInfo =  GameInfo(isHard = true))
+    val result = playTurn(GameStatus(player,boss, listOf(Spell(SpellName.PartTwoSpell))))
     return  result.minOf{ it.sumOf {spell -> spell.cost } }
 }
