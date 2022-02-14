@@ -1,10 +1,6 @@
-data class Boss(val damage:Int, val hitPoints:Int) {
-    fun hasLost() = hitPoints <= 0
-}
+data class Boss(val damage:Int, val hitPoints:Int)
 
-data class Player(val armour:Int, val hitPoints:Int, val mana:Int) {
-    fun hasLost() = hitPoints <= 0
-}
+data class Player(val armour:Int, val hitPoints:Int, val mana:Int)
 
 enum class SpellName{MagicMissile, Drain, Shield, Poison, Recharge}
 
@@ -32,73 +28,79 @@ fun List<Spell>.update() = fold(listOf<Spell>()){ newSpells, spell ->
     if (spell.life > 1 ) newSpells + Spell(spell.name, spell.life - 1) else newSpells
 }
 
-fun applyEffectBeforeTurn(player:Player, boss:Boss, spells:List<Spell>, isHard:Boolean):Triple<Player, Boss, List<Spell>> {
-    val updatedBoss = boss.applyEffectBeforeTurn(spells)
-    val updatePlayer = player.applyEffectBeforeTurn(spells, isHard)
-    val updatedSpells = spells.update()
-    return Triple(updatePlayer, updatedBoss, updatedSpells)
+data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<Spell> = listOf(), val mana:Int = player.mana ) {
+    fun applyEffectBeforeTurn(isHard: Boolean):GameStatus {
+        val updatedBoss = boss.applyEffectBeforeTurn(currentSpells)
+        val updatePlayer = player.applyEffectBeforeTurn(currentSpells, isHard)
+        val updatedSpells = currentSpells.update()
+        return GameStatus(updatePlayer, updatedBoss, updatedSpells)
+    }
+
+    fun applyInstantEffects():GameStatus = when(currentSpells.last().name) {
+        SpellName.MagicMissile -> GameStatus(player, Boss(boss.damage, boss.hitPoints- 4 ), currentSpells)
+        SpellName.Drain -> GameStatus(Player(player.armour, player.hitPoints + 2, player.mana)
+            , Boss(boss.damage, boss.hitPoints - 2 ), currentSpells
+        )
+        else -> this
+    }
+
+    fun addSpellAndDeductCost(newSpell: Spell):GameStatus {
+        val player = Player(player.armour, player.hitPoints, mana - newSpell.cost)
+        return GameStatus(player, boss, currentSpells + newSpell)
+    }
+
+    fun attackPlayer():GameStatus {
+        val attackedPlayer =  if (player.armour < boss.damage) Player( player.armour, player.hitPoints + player.armour - boss.damage, player.mana )
+        else Player( player.armour, player.hitPoints - 1, player.mana)
+        return GameStatus(attackedPlayer, boss, currentSpells)
+    }
+
+    fun bossHasLost() = boss.hitPoints <= 0
+    fun playerHasLost() = player.hitPoints <= 0
+
 }
-
-fun applyInstantEffects(player:Player, boss:Boss, spell:Spell):Pair<Player, Boss> = when(spell.name) {
-    SpellName.MagicMissile -> Pair(player, Boss(boss.damage,boss.hitPoints- 4 ))
-    SpellName.Drain -> Pair(Player(player.armour, player.hitPoints + 2, player.mana), Boss(boss.damage,boss.hitPoints - 2 ))
-    else -> Pair(player, boss)
-}
-
-fun attackPlayer(player: Player, boss: Boss):Player =
-    if (player.armour < boss.damage) Player( player.armour, player.hitPoints + player.armour - boss.damage, player.mana )
-    else Player( player.armour, player.hitPoints - 1, player.mana)
-
 data class ScoreCard(var minSpellCost:Int = Int.MAX_VALUE)
 
-fun playTurn(player:Player, boss:Boss, currentSpells:List<Spell> = listOf(), spellsCast:List<Spell> = listOf(), spellText:String = "", scoreCard:ScoreCard = ScoreCard(), isHard:Boolean):List<List<Spell>> {
+fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText:String = "", scoreCard:ScoreCard = ScoreCard(), isHard:Boolean):List<List<Spell>> {
 
     val spellCost = spellsCast.sumOf { it.cost }
+    val gameStatusBeforePlayersTurn = gameStatus.applyEffectBeforeTurn(isHard)
 
-    val (playerBeforePlayersTurn, bossBeforePlayersTurn, spellsBeforePlayersTurn) = applyEffectBeforeTurn(player, boss, currentSpells, isHard)
+    if (gameStatusBeforePlayersTurn.bossHasLost() ) return playerHasWon( spellCost, scoreCard, spellsCast)
+    if (gameStatusBeforePlayersTurn.playerHasLost()) return listOf() // boss has won
 
-    if (bossBeforePlayersTurn.hasLost() ) return playerHasWon(playerBeforePlayersTurn, bossBeforePlayersTurn, spellText, spellCost, scoreCard, spellsCast)
-    if (playerBeforePlayersTurn.hasLost()) return listOf() // boss has won
-
-    val possibleSpells = Spell.allTypes.filter{playerBeforePlayersTurn.mana >= it.cost  && it.name !in spellsBeforePlayersTurn.map{spell -> spell.name} && spellCost + it.cost < scoreCard.minSpellCost}
+    val possibleSpells = Spell.allTypes.filter{gameStatusBeforePlayersTurn.mana >= it.cost  && it.name !in gameStatusBeforePlayersTurn.currentSpells.map{spell -> spell.name} && spellCost + it.cost < scoreCard.minSpellCost}
 
     return possibleSpells.flatMap{ newSpell ->
-        val playerAfterCostOfSpellDeducted = Player(playerBeforePlayersTurn.armour, playerBeforePlayersTurn.hitPoints, playerBeforePlayersTurn.mana - newSpell.cost)
+        val gameStatusAfterPlayersTurn = gameStatusBeforePlayersTurn
+            .addSpellAndDeductCost(newSpell)
+            .applyInstantEffects()
 
-        val (playerAfterPlayersTurn, bossAfterPlayersTurn) = applyInstantEffects(playerAfterCostOfSpellDeducted, bossBeforePlayersTurn, newSpell)
+        val gameStatusBeforeBossesTurn = gameStatusAfterPlayersTurn.applyEffectBeforeTurn(isHard)
+        val gameStatusAfterBossesTurn = gameStatusBeforeBossesTurn.attackPlayer()
 
-        if (bossAfterPlayersTurn.hasLost()) {
-            playerHasWon(playerBeforePlayersTurn, bossBeforePlayersTurn, spellText + newSpell.name,  spellCost + newSpell.cost, scoreCard, spellsCast + newSpell)
-        } else {
-            val (playerBeforeBossesTurn, bossBeforeBossesTurn, spellsBeforeBossesTurn) = applyEffectBeforeTurn(playerAfterPlayersTurn, bossAfterPlayersTurn, spellsBeforePlayersTurn + newSpell , isHard)
-            if (bossBeforeBossesTurn.hasLost() ) {
-                playerHasWon(playerBeforeBossesTurn, bossBeforeBossesTurn, spellText + newSpell.name,  spellCost + newSpell.cost, scoreCard, spellsCast + newSpell)
-            } else if (playerBeforeBossesTurn.hasLost()) {
-                listOf() //boss has won
-            } else {
-                val playerAfterBossesTurn = attackPlayer(playerBeforeBossesTurn, bossBeforeBossesTurn)
-                if (playerAfterBossesTurn.hasLost()) {
-                    listOf() //boss has won
-                } else {
-                    playTurn(playerAfterBossesTurn, bossBeforeBossesTurn, spellsBeforeBossesTurn, spellsCast + newSpell, "$spellText ${newSpell.name}", scoreCard, isHard)
-                }
-            }
+        when {
+            gameStatusAfterPlayersTurn.bossHasLost() || gameStatusBeforeBossesTurn.bossHasLost() ->
+                playerHasWon( spellCost + newSpell.cost, scoreCard, spellsCast + newSpell)
+            gameStatusBeforeBossesTurn.playerHasLost() || gameStatusAfterBossesTurn.playerHasLost() ->
+                listOf()
+            else ->
+                playTurn( gameStatusAfterBossesTurn, spellsCast + newSpell, "$spellText ${newSpell.name}", scoreCard, isHard)
         }
     }
 }
 
-fun playerHasWon(player: Player, boss: Boss, spellText: String, spellCost: Int, scoreCard: ScoreCard, spellsCast: List<Spell>): List<List<Spell>> {
-    println("Player wins hit point:${player.hitPoints} boss hit points:${boss.hitPoints}  spells: $spellText")
+fun playerHasWon(spellCost: Int, scoreCard: ScoreCard, spellsCast: List<Spell>): List<List<Spell>> {
     if (spellCost < scoreCard.minSpellCost) scoreCard.minSpellCost = spellCost
     return listOf(spellsCast)
 }
 
 fun partOne(player:Player, boss:Boss):Int {
-    val result = playTurn(player,boss, isHard = false)
+    val result = playTurn(GameStatus(player,boss), isHard = false)
     return  result.minOf{ it.sumOf {spell -> spell.cost } }
 }
 
 fun partTwo(player:Player, boss:Boss):Int {
-    val result = playTurn(player,boss,isHard = true)
+    val result = playTurn(GameStatus(player,boss),isHard = true)
     return  result.minOf{ it.sumOf {spell -> spell.cost } }
 }
