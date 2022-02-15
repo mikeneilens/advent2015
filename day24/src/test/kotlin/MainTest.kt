@@ -21,12 +21,12 @@ class MainTest {
     }
     @Test
     fun `quantum entanglement of 10, 9,1  is 90`() {
-        assertEquals(90, setOf(10,9,1).quantumEntanglement())
+        assertEquals(90, quantumEntanglement(setOf(10,9,1)))
     }
     @Test
     fun `smalest sets that add up to 20`() {
-        val fullSet = sampleData.map(String::toInt).reversed()
-        val result = setsWithTargetWeight(20, fullSet,setOf())
+        val fullSet = parse(sampleData)
+        val result = groupsWithTargetWeight(20, fullSet, setOf())
         val expectedResult = listOf(setOf(11, 9))
         assertEquals(expectedResult, result)
     }
@@ -45,7 +45,7 @@ class MainTest {
     }
     @Test
     fun `part two using puzzleInput`() {
-        assertEquals(77387711, partTwo(puzzleInput))
+        assertEquals(77387711L, partTwo(puzzleInput))
     }
 
 }

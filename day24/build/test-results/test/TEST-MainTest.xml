@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-15T21:25:16" hostname="MacBook-Pro-2" time="0.326">
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-15T21:32:35" hostname="MacBook-Pro-2" time="0.355">
   <properties/>
-  <testcase name="smalest sets that add up to 20()" classname="MainTest" time="0.044"/>
-  <testcase name="quantum entanglement of 10, 9,1  is 90()" classname="MainTest" time="0.0"/>
-  <testcase name="part two using puzzleInput()" classname="MainTest" time="0.097"/>
+  <testcase name="smalest sets that add up to 20()" classname="MainTest" time="0.053"/>
+  <testcase name="quantum entanglement of 10, 9,1  is 90()" classname="MainTest" time="0.001"/>
+  <testcase name="part two using puzzleInput()" classname="MainTest" time="0.106"/>
   <testcase name="part two using sample data()" classname="MainTest" time="0.001"/>
   <testcase name="target weight of sample data is 20()" classname="MainTest" time="0.001"/>
-  <testcase name="part one using puzzle input()" classname="MainTest" time="0.18"/>
-  <testcase name="part one using sample data()" classname="MainTest" time="0.0"/>
+  <testcase name="part one using puzzle input()" classname="MainTest" time="0.19"/>
+  <testcase name="part one using sample data()" classname="MainTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
