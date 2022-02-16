@@ -1,18 +1,19 @@
+typealias Group = Set<Int>
 
-fun Set<Int>.weight() = sum()
+fun Group.weight() = sum()
 
-fun quantumEntanglement(set:Set<Int>) = set.fold(1L){ acc, i -> acc * i  }
+fun quantumEntanglement(group:Group) = group.fold(1L){ acc, i -> acc * i  }
 
 data class Info(var smallestGroupSize:Int = Int.MAX_VALUE)
 
-fun groupsWithTargetWeight(targetWeight:Int, fullSet:List<Int>, setSoFar:Set<Int>, info:Info = Info()):List<Set<Int>> {
-    return if (setSoFar.weight() == targetWeight){
-        info.smallestGroupSize = setSoFar.size
-        listOf(setSoFar)
+fun groupsWithTargetWeight(targetWeight:Int, fullSet:List<Int>, groupSoFar:Group, info:Info = Info()):List<Group> {
+    return if (groupSoFar.weight() == targetWeight){
+        info.smallestGroupSize = groupSoFar.size
+        listOf(groupSoFar)
     } else fullSet
-        .filter{ num -> (setSoFar.size < info.smallestGroupSize) && (num + setSoFar.weight() <= targetWeight)}
+        .filter{ num -> (groupSoFar.size < info.smallestGroupSize) && (num + groupSoFar.weight() <= targetWeight)}
         .flatMap { num ->
-            groupsWithTargetWeight(targetWeight, fullSet.filter{it < num} , setSoFar + num, info )}
+            groupsWithTargetWeight(targetWeight, fullSet.filter{it < num} , groupSoFar + num, info )}
 }
 
 val targetWeightPartOne = { strings:List<String> -> strings.sumOf(String::toInt)/3}
