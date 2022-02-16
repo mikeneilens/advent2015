@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="MainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-02-16T21:03:26" hostname="MacBook-Pro-2" time="0.199">
+  <properties/>
+  <testcase name="code after 20151125 is 31916031()" classname="MainTest" time="0.016"/>
+  <testcase name="part one using 1,2 as the target()" classname="MainTest" time="0.008"/>
+  <testcase name="part one()" classname="MainTest" time="0.173"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
