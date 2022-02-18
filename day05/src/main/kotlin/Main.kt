@@ -23,6 +23,8 @@ fun String.doesNotContainBannedStrings(bannedStrings:List<String> = listOf("ab",
 
 fun String.isNiceStringPartOne() = containsThreeVowels() && containsRepeatingChar() && doesNotContainBannedStrings()
 
+fun partOne(data: List<String>) = niceStrings(data, String::isNiceStringPartOne)
+
 fun niceStrings(data:List<String>, niceStringRule:String.()->Boolean) = data.filter(niceStringRule).size
 
 fun String.containsPairThatAppearsTwiceWithoutOverlapping():Boolean {
@@ -44,6 +46,7 @@ fun String.containsRepeatingCharWithACharBetweenThem(): Boolean {
 
 fun String.isNiceStringPartTwo() = containsPairThatAppearsTwiceWithoutOverlapping() && containsRepeatingCharWithACharBetweenThem()
 
+fun partTwo(data: List<String>) = niceStrings(data, String::isNiceStringPartTwo)
 
 
 

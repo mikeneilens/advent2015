@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-01-19T15:47:14" hostname="MacBook-Pro-2" time="0.065">
+<testsuite name="MainTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-02-18T21:25:22" hostname="MacBook-Pro-2" time="0.075">
   <properties/>
-  <testcase name="string contains at least three vowels()" classname="MainTest" time="0.025"/>
+  <testcase name="string contains at least three vowels()" classname="MainTest" time="0.029"/>
   <testcase name="string contains at repeating Char()" classname="MainTest" time="0.001"/>
-  <testcase name="contains pair that appears twice without overlapping()" classname="MainTest" time="0.004"/>
-  <testcase name="nice string()" classname="MainTest" time="0.017"/>
+  <testcase name="contains pair that appears twice without overlapping()" classname="MainTest" time="0.005"/>
+  <testcase name="nice string()" classname="MainTest" time="0.018"/>
   <testcase name="contains a repeating letter with a letter between them()" classname="MainTest" time="0.001"/>
-  <testcase name="part one()" classname="MainTest" time="0.008"/>
-  <testcase name="part two()" classname="MainTest" time="0.006"/>
+  <testcase name="part one()" classname="MainTest" time="0.01"/>
+  <testcase name="part two()" classname="MainTest" time="0.007"/>
   <testcase name="string does not contains banned strings()" classname="MainTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

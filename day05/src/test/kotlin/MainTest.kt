@@ -30,7 +30,7 @@ class MainTest {
     }
     @Test
     fun `part one`() {
-        assertEquals(255, niceStrings(puzzleInput, String::isNiceStringPartOne))
+        assertEquals(255, partOne(puzzleInput))
     }
 
     @Test
@@ -50,7 +50,7 @@ class MainTest {
 
     @Test
     fun `part two`() {
-        assertEquals(55, niceStrings(puzzleInput, String::isNiceStringPartTwo))
+        assertEquals(55, partTwo(puzzleInput))
     }
 
 }
