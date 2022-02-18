@@ -11,7 +11,7 @@ class MainTest {
 
     @Test
     fun `part one`() {
-        assertEquals(569999, processInstructions(puzzleInput, partOneRules))
+        assertEquals(569999, partOne(puzzleInput))
     }
 
     @Test
@@ -31,6 +31,6 @@ class MainTest {
     }
     @Test
     fun `part two`() {
-        assertEquals(17836115, processInstructions(puzzleInput, partTwoRules))
+        assertEquals(17836115, partTwo(puzzleInput))
     }
 }

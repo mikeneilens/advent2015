@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-01-20T19:56:36" hostname="MacBook-Pro-2" time="31.027">
+<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-18T21:30:01" hostname="MacBook-Pro-2" time="30.671">
   <properties/>
-  <testcase name="string to Instruction()" classname="MainTest" time="0.026"/>
-  <testcase name="toggle brightness()" classname="MainTest" time="0.764"/>
-  <testcase name="decreasing brightness()" classname="MainTest" time="0.905"/>
-  <testcase name="part one()" classname="MainTest" time="12.495"/>
-  <testcase name="part two()" classname="MainTest" time="16.833"/>
+  <testcase name="string to Instruction()" classname="MainTest" time="0.03"/>
+  <testcase name="toggle brightness()" classname="MainTest" time="0.771"/>
+  <testcase name="decreasing brightness()" classname="MainTest" time="0.932"/>
+  <testcase name="part one()" classname="MainTest" time="12.253"/>
+  <testcase name="part two()" classname="MainTest" time="16.682"/>
   <testcase name="incresasing brightness()" classname="MainTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

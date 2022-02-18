@@ -36,9 +36,13 @@ fun MutableMap<Position, Int>.applyRule(instruction:Instruction, rules:Map<Comma
     }
 }
 
+fun partOne(data:List<String>) = processInstructions(data, partOneRules)
+
 val partTwoRules = mapOf(
     Command.TurnOn to {map:MutableMap<Position, Int>, position:Position -> map[position] = (map[position] ?: 0) + 1  },
     Command.TurnOff to {map:MutableMap<Position, Int>, position:Position ->  if (position in map && map.getValue(position) > 0) map[position] = (map[position] ?: 0) - 1  },
     Command.Toggle to {map:MutableMap<Position, Int>, position:Position -> map[position] = (map[position] ?: 0) + 2 }
 )
+
+fun partTwo(data:List<String>) = processInstructions(data, partTwoRules)
 
