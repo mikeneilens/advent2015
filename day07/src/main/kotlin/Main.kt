@@ -75,7 +75,7 @@ fun makeCircuit(instructions: List<Instruction>, wires:MutableMap<String, Int> =
             complete = false
         }
     }
-    if (complete) return wires else return makeCircuit(instructions, wires)
+    return if (complete) wires else makeCircuit(instructions, wires)
 }
 
 fun partOne(data:List<String>):Map<String, Int> {
@@ -84,7 +84,7 @@ fun partOne(data:List<String>):Map<String, Int> {
 }
 
 fun List<Instruction>.override(wire:String, value:Int) = map{
-    if (it.output == "b") Assign("$value", "b") else it
+    if (it.output == wire) Assign("$value", wire) else it
 }
 
 fun partTwo(data:List<String>):Map<String, Int> {

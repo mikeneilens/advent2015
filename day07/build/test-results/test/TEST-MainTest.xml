@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-01-21T12:13:38" hostname="MacBook-Pro-2" time="0.484">
+<testsuite name="MainTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2022-02-18T21:34:39" hostname="MacBook-Pro-2" time="0.368">
   <properties/>
-  <testcase name="part one ()" classname="MainTest" time="0.266"/>
-  <testcase name="part two ()" classname="MainTest" time="0.217"/>
-  <testcase name="exmpale for part one()" classname="MainTest" time="0.001"/>
+  <testcase name="part one ()" classname="MainTest" time="0.21"/>
+  <testcase name="part two ()" classname="MainTest" time="0.156"/>
+  <testcase name="exmpale for part one()" classname="MainTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
