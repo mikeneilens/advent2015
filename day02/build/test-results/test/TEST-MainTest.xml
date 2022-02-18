@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-01-18T21:43:03" hostname="MacBook-Pro-2" time="0.046">
+<testsuite name="MainTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2022-02-18T21:12:28" hostname="MacBook-Pro-2" time="0.047">
   <properties/>
-  <testcase name="ribbon needed in sample 1 is 34 feet()" classname="MainTest" time="0.033"/>
+  <testcase name="ribbon needed in sample 1 is 34 feet()" classname="MainTest" time="0.035"/>
   <testcase name="second sample results in 43()" classname="MainTest" time="0.001"/>
-  <testcase name="first sample results in 58()" classname="MainTest" time="0.0"/>
+  <testcase name="first sample results in 58()" classname="MainTest" time="0.001"/>
   <testcase name="ribbon needed in sample 2 is 14 feet()" classname="MainTest" time="0.0"/>
   <testcase name="part one()" classname="MainTest" time="0.006"/>
   <testcase name="part two()" classname="MainTest" time="0.003"/>

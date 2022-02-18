@@ -1,11 +1,18 @@
-data class Box (val l:Int, val w:Int, val h:Int)
+data class Box (val l:Int, val w:Int, val h:Int) {
 
-fun paperNeeded(data: String): Int {
-    val (side1, side2, side3) = createBox(data).calcSides()
-    return 2 * (side1 + side2 + side3) + listOf(side1, side2, side3).minOf {it}
+    val areaOfEachSide = listOf(l * w, l * h, w * h)
+    val surfaceArea = 2 * areaOfEachSide.sum()
+
+    fun smallestSide() = areaOfEachSide.minOf { it }
+    fun shortestDistanceAroundItsSides() = listOf(2 * (l + w), 2 * ( l + h), 2 * (w + h) ).minOf {it}
+
+    fun volume() = l * w * h
 }
 
-fun Box.calcSides() = Triple(l * w, l * h, w * h)
+fun paperNeeded(data: String): Int {
+    val box = createBox(data)
+    return box.surfaceArea + box.smallestSide()
+}
 
 fun createBox(data: String) =
     Box(data.split("x")[0].toInt(), data.split("x")[1].toInt(), data.split("x")[2].toInt())
@@ -17,8 +24,6 @@ fun ribbonNeeded(data: String): Int {
     val box = createBox(data)
     return box.shortestDistanceAroundItsSides() + box.volume()
 }
-fun Box.shortestDistanceAroundItsSides() = listOf(2 * (l + w), 2 * ( l + h), 2 * (w + h) ).minOf {it}
-fun Box.volume() = l * w * h
 
 fun partTwo(data:List<String>):Int =
     data.fold(0){totalRibbon, boxData -> totalRibbon + ribbonNeeded(boxData) }
