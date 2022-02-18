@@ -22,7 +22,9 @@ fun Visits.visitHouses(directions: String): Visits {
     return this
 }
 
-fun partTwo(directions: String): Int =
+fun partOne(directions: String) = Visits().visitHouses(directions).size
+
+fun partTwo(directions: String) =
    Visits()
        .visitHouses(santaData(directions,0))
        .visitHouses(santaData(directions,1))

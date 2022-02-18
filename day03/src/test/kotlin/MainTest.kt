@@ -16,7 +16,7 @@ class MainTest {
     }
     @Test
     fun `part one`() {
-        assertEquals(2081, Visits().visitHouses(puzzleInput).size)
+        assertEquals(2081, partOne(puzzleInput))
     }
 
     @Test
