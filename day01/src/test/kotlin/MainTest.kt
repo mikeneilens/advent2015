@@ -37,7 +37,7 @@ class MainTest {
     }
     @Test
     fun `part one`() {
-        assertEquals(232, findFloor(puzzleInput))
+        assertEquals(232, partOne(puzzleInput))
     }
 
     @Test
@@ -50,6 +50,6 @@ class MainTest {
     }
     @Test
     fun `part two`() {
-        assertEquals(1783, findPositionForFloor(puzzleInput,-1))
+        assertEquals(1783, partTwo(puzzleInput))
     }
 }
