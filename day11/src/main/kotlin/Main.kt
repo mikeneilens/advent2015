@@ -37,3 +37,7 @@ fun String.nextPasswrd():String {
     }
     return chars.joinToString("")
 }
+
+fun partOne(password:String):String = password.nextPasswrd()
+
+fun partTwo(password:String):String = password.nextPasswrd().nextPasswrd()

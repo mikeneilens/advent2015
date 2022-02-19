@@ -45,11 +45,11 @@ class MainTest {
     }
     @Test
     fun `part one`() {
-        assertEquals("hepxxyzz", "hepxcrrq".nextPasswrd())
+        assertEquals("hepxxyzz", partOne("hepxcrrq"))
     }
     @Test
     fun `part two`() {
-        assertEquals("heqaabcc", "hepxcrrq".nextPasswrd().nextPasswrd())
+        assertEquals("heqaabcc", partTwo("hepxcrrq"))
     }
 
 }
