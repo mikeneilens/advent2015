@@ -51,6 +51,10 @@ fun String.isStringLiteral() = startsWith('"')
 fun String.isArray() = startsWith('[')
 fun String.isObject() = startsWith('{')
 
+fun partOne(data:String) = data.evaluate().sum()
+
+fun partTwo(data:String) = data.evaluate().sum(JElement.StringLiteral("red"))
+
 fun String.evaluate():JElement = when {
     isNumberLiteral() -> JElement.NumberLiteral(elementText().toInt())
     isStringLiteral() -> JElement.StringLiteral(elementText().drop(1).dropLast(1))

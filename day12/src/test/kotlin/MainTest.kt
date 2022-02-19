@@ -25,7 +25,7 @@ class MainTest {
     }
     @Test
     fun `part one`(){
-        assertEquals(119433, puzzleInput.evaluate().sum())
+        assertEquals(119433, partOne(puzzleInput))
     }
     @Test
     fun `converting to text when invalid json`() {
@@ -108,7 +108,7 @@ class MainTest {
     }
     @Test
     fun `part two`() {
-        assertEquals(68466,puzzleInput.evaluate().sum(JElement.StringLiteral("red")) )
+        assertEquals(68466,partTwo(puzzleInput) )
     }
 
 }

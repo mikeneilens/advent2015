@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2022-01-27T19:16:21" hostname="MacBook-Pro-2" time="0.361">
+<testsuite name="MainTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2022-02-19T14:56:57" hostname="MacBook-Pro-2" time="0.353">
   <properties/>
   <testcase name="sample 2 has a total of 3()" classname="MainTest" time="0.041"/>
   <testcase name="converting to different types of text when invalid json()" classname="MainTest" time="0.001"/>
   <testcase name="evaluate a json string containing an object containing nothing()" classname="MainTest" time="0.001"/>
-  <testcase name="evaluate a json string containing an array containing one number()" classname="MainTest" time="0.001"/>
-  <testcase name="get text for a number()" classname="MainTest" time="0.001"/>
+  <testcase name="evaluate a json string containing an array containing one number()" classname="MainTest" time="0.0"/>
+  <testcase name="get text for a number()" classname="MainTest" time="0.0"/>
   <testcase name="get text for an object()" classname="MainTest" time="0.001"/>
   <testcase name="sample 1 has a total of 6()" classname="MainTest" time="0.001"/>
-  <testcase name="get text for an string()" classname="MainTest" time="0.0"/>
+  <testcase name="get text for an string()" classname="MainTest" time="0.001"/>
   <testcase name="evaluate a json string containing an object containing a number()" classname="MainTest" time="0.001"/>
-  <testcase name="evaluate a json string containing an array containing nothing()" classname="MainTest" time="0.001"/>
-  <testcase name="evaluate a json string containing an object containing a number and a object()" classname="MainTest" time="0.013"/>
+  <testcase name="evaluate a json string containing an array containing nothing()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an object containing a number and a object()" classname="MainTest" time="0.012"/>
   <testcase name="evaluate a json string containing an object containing a number and a string()" classname="MainTest" time="0.0"/>
   <testcase name="sample 4 has a total of 0()" classname="MainTest" time="0.0"/>
   <testcase name="converting to text when invalid json()" classname="MainTest" time="0.001"/>
   <testcase name="sample 3 has a total of 0()" classname="MainTest" time="0.001"/>
-  <testcase name="part one()" classname="MainTest" time="0.188"/>
-  <testcase name="part two()" classname="MainTest" time="0.099"/>
-  <testcase name="evaluate a json string containing a number()" classname="MainTest" time="0.001"/>
+  <testcase name="part one()" classname="MainTest" time="0.182"/>
+  <testcase name="part two()" classname="MainTest" time="0.097"/>
+  <testcase name="evaluate a json string containing a number()" classname="MainTest" time="0.0"/>
   <testcase name="get text for an array()" classname="MainTest" time="0.0"/>
   <testcase name="evaluate a json string containing a string()" classname="MainTest" time="0.0"/>
-  <testcase name="evaluate a json string containing an array containing a number and a string()" classname="MainTest" time="0.001"/>
-  <testcase name="evaluate a json string containing an object containing a number and an array()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an array containing a number and a string()" classname="MainTest" time="0.0"/>
+  <testcase name="evaluate a json string containing an object containing a number and an array()" classname="MainTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
