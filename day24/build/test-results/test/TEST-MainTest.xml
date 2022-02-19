@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-16T08:56:55" hostname="MacBook-Pro-2" time="0.447">
+<testsuite name="MainTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-02-19T16:25:49" hostname="MacBook-Pro-2" time="0.337">
   <properties/>
-  <testcase name="smalest sets that add up to 20()" classname="MainTest" time="0.058"/>
-  <testcase name="quantum entanglement of 10, 9,1  is 90()" classname="MainTest" time="0.001"/>
-  <testcase name="part two using puzzleInput()" classname="MainTest" time="0.128"/>
+  <testcase name="smalest sets that add up to 20()" classname="MainTest" time="0.042"/>
+  <testcase name="quantum entanglement of 10, 9,1  is 90()" classname="MainTest" time="0.0"/>
+  <testcase name="part two using puzzleInput()" classname="MainTest" time="0.096"/>
   <testcase name="part two using sample data()" classname="MainTest" time="0.001"/>
   <testcase name="target weight of sample data is 20()" classname="MainTest" time="0.001"/>
-  <testcase name="part one using puzzle input()" classname="MainTest" time="0.255"/>
+  <testcase name="part one using puzzle input()" classname="MainTest" time="0.194"/>
   <testcase name="part one using sample data()" classname="MainTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
