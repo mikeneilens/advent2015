@@ -6,7 +6,7 @@ class MainTest {
     fun `casting magic missile`() {
         val boss = Boss(8,50)
         val player = Player(0,150,20)
-        val spell = Spell(SpellName.MagicMissile, 0)
+        val spell = MagicMissle()
         val (_, updatedBoss) = GameStatus(player, boss, listOf(spell)).applyInstantEffects()
         assertEquals( 46 , updatedBoss.hitPoints )
     }
@@ -15,7 +15,7 @@ class MainTest {
     fun `casting drain`() {
         val boss = Boss(8,50)
         val player = Player(0,150,20)
-        val spell = Spell(SpellName.Drain, 0)
+        val spell = Drain()
         val (updatedPlayer, updatedBoss) = GameStatus(player, boss, listOf(spell)).applyInstantEffects()
         assertEquals( 48 , updatedBoss.hitPoints)
         assertEquals( 152 , updatedPlayer.hitPoints)
@@ -25,7 +25,7 @@ class MainTest {
     fun `casting shield`() {
         val player = Player(0,150,20)
         val boss = Boss(8,50)
-        val spell = Spell(SpellName.Shield, 6)
+        val spell = Shield()
         val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn()
         assertEquals(boss, updatedBoss)
         assertEquals(7, updatedPlayer.armour)
@@ -36,7 +36,7 @@ class MainTest {
     fun `casting poison`() {
         val player = Player(0,150,20)
         val boss = Boss(8,50)
-        val spell = Spell(SpellName.Poison, 6)
+        val spell = Poison()
         val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn()
         assertEquals(player, updatedPlayer)
         assertEquals(boss.hitPoints - 3, updatedBoss.hitPoints)
@@ -45,13 +45,13 @@ class MainTest {
 
     @Test
     fun `casting recharge`() {
-        val spell = Spell(SpellName.Recharge, 6)
+        val spell = Recharge()
         val player = Player(0,150,20)
         val boss = Boss(8,50)
         val (updatedPlayer, updatedBoss, updatedSpells) = GameStatus(player, boss, listOf(spell)).applyEffectBeforeTurn()
         assertEquals(boss, updatedBoss)
         assertEquals(player.mana + 101, updatedPlayer.mana)
-        assertEquals(5, updatedSpells.first().lifeLeft)
+        assertEquals(4, updatedSpells.first().lifeLeft)
     }
 
     @Test
