@@ -1,20 +1,20 @@
 data class Boss(val damage:Int, val hitPoints:Int) {
-    fun reduceHitPoints(amount:Int) = Boss(damage, hitPoints - amount )
+    fun reduceHitPoints(amount:Int) = copy(hitPoints = hitPoints - amount )
 
     fun applyEffectBeforeTurn(spells:List<Spell>):Boss = spells.fold(this, Boss::updateBossUsingSpell)
     fun updateBossUsingSpell(spell:Spell) = spell.updateBossBeforeTurn(this)
 }
 
 data class Player(val armour:Int, val hitPoints:Int, val mana:Int) {
-    val withNoArmour by lazy {Player(0, hitPoints, mana)}
-    val withArmour by lazy {Player(7, hitPoints, mana)}
+    val withNoArmour by lazy {copy(armour = 0)}
+    val withArmour by lazy {copy(armour = 7)}
 
-    fun increaseHitPoint(amount:Int) = Player(armour, hitPoints + amount, mana)
+    fun increaseHitPoint(amount:Int) = copy(hitPoints = hitPoints + amount)
     fun reduceHitPoint(amount:Int) = increaseHitPoint(-amount)
-    fun increaseMana(amount:Int) = Player(armour, hitPoints, mana + amount)
+    fun increaseMana(amount:Int) = copy(mana = mana + amount)
     fun reduceMana(amount:Int) = increaseMana(-amount)
-    fun attackPlayer(damage:Int) = if (armour < damage) reduceHitPoint(damage - armour) else reduceHitPoint(1)
 
+    fun attackPlayer(damage:Int) = if (armour < damage) reduceHitPoint(damage - armour) else reduceHitPoint(1)
     fun applyEffectBeforeTurn(spells:List<Spell>):Player = spells.fold(this.withNoArmour, Player::updatePlayerUsingSpell)
     fun updatePlayerUsingSpell(spell:Spell) = spell.updatePlayerBeforeTurn(this)
 }
@@ -68,7 +68,7 @@ data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<S
     fun addSpellAndDeductCost(newSpell: Spell):GameStatus =
         GameStatus(player.reduceMana(newSpell.cost), boss, currentSpells + newSpell)
 
-    fun attackPlayer():GameStatus = GameStatus(player.attackPlayer(boss.damage), boss, currentSpells)
+    fun attackPlayer():GameStatus = copy(player = player.attackPlayer(boss.damage))
 
     fun playerHasWon() = boss.hitPoints <= 0
     fun bossHasWon() = player.hitPoints <= 0

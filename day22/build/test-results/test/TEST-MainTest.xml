@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-02-20T18:24:50" hostname="MacBook-Pro-2" time="1.193">
+<testsuite name="MainTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-02-20T20:06:53" hostname="MacBook-Pro-2" time="1.026">
   <properties/>
-  <testcase name="casting recharge()" classname="MainTest" time="0.042"/>
-  <testcase name="casting magic missile()" classname="MainTest" time="0.0"/>
+  <testcase name="casting recharge()" classname="MainTest" time="0.034"/>
+  <testcase name="casting magic missile()" classname="MainTest" time="0.001"/>
   <testcase name="casting drain()" classname="MainTest" time="0.001"/>
-  <testcase name="playing a game from second example()" classname="MainTest" time="0.004"/>
+  <testcase name="playing a game from second example()" classname="MainTest" time="0.002"/>
   <testcase name="casting poison()" classname="MainTest" time="0.0"/>
-  <testcase name="casting shield()" classname="MainTest" time="0.0"/>
+  <testcase name="casting shield()" classname="MainTest" time="0.001"/>
   <testcase name="playing a game from first example()" classname="MainTest" time="0.001"/>
-  <testcase name="part Two()" classname="MainTest" time="0.136"/>
-  <testcase name="part one()" classname="MainTest" time="1.004"/>
+  <testcase name="part Two()" classname="MainTest" time="0.135"/>
+  <testcase name="part one()" classname="MainTest" time="0.85"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
