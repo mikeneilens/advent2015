@@ -6,7 +6,7 @@ class MainTest {
     fun `casting magic missile`() {
         val boss = Boss(8,50)
         val player = Player(0,150,20)
-        val spell = MagicMissle()
+        val spell = MagicMissile()
         val (_, updatedBoss) = GameStatus(player, boss, listOf(spell)).applyInstantEffects()
         assertEquals( 46 , updatedBoss.hitPoints )
     }

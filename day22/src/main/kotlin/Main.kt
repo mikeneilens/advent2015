@@ -1,6 +1,23 @@
-data class Boss(val damage:Int, val hitPoints:Int)
+data class Boss(val damage:Int, val hitPoints:Int) {
+    fun reduceHitPoints(amount:Int) = Boss(damage, hitPoints - amount )
 
-data class Player(val armour:Int, val hitPoints:Int, val mana:Int)
+    fun applyEffectBeforeTurn(spells:List<Spell>):Boss = spells.fold(this, Boss::updateBossUsingSpell)
+    fun updateBossUsingSpell(spell:Spell) = spell.updateBossBeforeTurn(this)
+}
+
+data class Player(val armour:Int, val hitPoints:Int, val mana:Int) {
+    val withNoArmour by lazy {Player(0, hitPoints, mana)}
+    val withArmour by lazy {Player(7, hitPoints, mana)}
+
+    fun increaseHitPoint(amount:Int) = Player(armour, hitPoints + amount, mana)
+    fun reduceHitPoint(amount:Int) = increaseHitPoint(-amount)
+    fun increaseMana(amount:Int) = Player(armour, hitPoints, mana + amount)
+    fun reduceMana(amount:Int) = increaseMana(-amount)
+    fun attackPlayer(damage:Int) = if (armour < damage) reduceHitPoint(damage - armour) else reduceHitPoint(1)
+
+    fun applyEffectBeforeTurn(spells:List<Spell>):Player = spells.fold(this.withNoArmour, Player::updatePlayerUsingSpell)
+    fun updatePlayerUsingSpell(spell:Spell) = spell.updatePlayerBeforeTurn(this)
+}
 
 abstract class Spell(val name:String, val cost:Int, val lifeLeft:Int) {
     open fun updatePlayerBeforeTurn(player:Player):Player = player
@@ -9,46 +26,38 @@ abstract class Spell(val name:String, val cost:Int, val lifeLeft:Int) {
     open fun instantEffectOnBoss(boss:Boss) = boss
     open fun reduceLife():Spell = this
 }
-class MagicMissle():Spell("Magic Missile", 53,0) {
-    override fun instantEffectOnBoss(boss: Boss) = Boss(boss.damage, boss.hitPoints- 4 )
+class MagicMissile:Spell("Magic Missile", 53,0) {
+    override fun instantEffectOnBoss(boss: Boss) = boss.reduceHitPoints(4)
 }
-class Drain():Spell("Drain", 73, 0) {
-    override fun instantEffectOnPlayer(player: Player) = Player(player.armour, player.hitPoints + 2, player.mana)
-    override fun instantEffectOnBoss(boss: Boss) = Boss(boss.damage, boss.hitPoints - 2 )
+class Drain:Spell("Drain", 73, 0) {
+    override fun instantEffectOnPlayer(player: Player) = player.increaseHitPoint(2)
+    override fun instantEffectOnBoss(boss: Boss) = boss.reduceHitPoints(2)
 }
 class Shield(lifeLeft:Int = 6):Spell("Shield",113,lifeLeft) {
-    override fun updatePlayerBeforeTurn(player: Player) = Player(7, player.hitPoints, player.mana)
-    override fun reduceLife() = Shield(lifeLeft -1)
+    override fun updatePlayerBeforeTurn(player: Player) = player.withArmour
+    override fun reduceLife() = Shield(lifeLeft - 1)
 }
 class Poison(lifeLeft:Int = 6):Spell("Poison", 173,lifeLeft) {
-    override fun updateBossBeforeTurn(boss: Boss) = Boss(boss.damage, boss.hitPoints - 3)
-    override fun reduceLife() = Poison(lifeLeft -1)
+    override fun updateBossBeforeTurn(boss: Boss) = boss.reduceHitPoints(3)
+    override fun reduceLife() = Poison(lifeLeft - 1)
 }
 class Recharge(lifeLeft:Int = 5):Spell("Recharge", 229, lifeLeft) {
-    override fun updatePlayerBeforeTurn(player: Player) = Player(player.armour, player.hitPoints,player.mana + 101)
-    override fun reduceLife() = Recharge(lifeLeft -1)
+    override fun updatePlayerBeforeTurn(player: Player) = player.increaseMana(101)
+    override fun reduceLife() = Recharge(lifeLeft - 1)
 }
-class PartTwoSpell():Spell("PartTwo Spell", 99999, 99999) {
-    override fun updatePlayerBeforeTurn(player: Player) = Player(player.armour, player.hitPoints -1 , player.mana)
+class PartTwoSpell:Spell("PartTwo Spell", 99999, 99999) {
+    override fun updatePlayerBeforeTurn(player: Player) = player.reduceHitPoint(1)
 }
 
-fun Boss.applyEffectBeforeTurn(spells:List<Spell>):Boss = spells.fold(this, ::updateBossUsingSpell)
-
-fun Player.applyEffectBeforeTurn(spells:List<Spell>):Player = spells.fold(Player(0, this.hitPoints, this.mana), ::updatePlayerUsingSpell)
-
-fun updateBossUsingSpell(boss:Boss, spell:Spell) = spell.updateBossBeforeTurn(boss)
-fun updatePlayerUsingSpell(player:Player, spell:Spell) = spell.updatePlayerBeforeTurn(player)
-
-fun List<Spell>.update() = fold(listOf<Spell>()){ newSpells, spell -> if (spell.lifeLeft > 1 ) newSpells + spell.reduceLife() else newSpells}
+fun List<Spell>.reduceLife() = fold(listOf<Spell>()){ newSpells, spell -> if (spell.lifeLeft > 1 ) newSpells + spell.reduceLife() else newSpells}
 
 data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<Spell> = listOf(), val mana:Int = player.mana ) {
 
-    fun applyEffectBeforeTurn():GameStatus {
-        val updatedBoss = boss.applyEffectBeforeTurn(currentSpells)
-        val updatePlayer = player.applyEffectBeforeTurn(currentSpells)
-        val updatedSpells = currentSpells.update()
-        return GameStatus(updatePlayer, updatedBoss, updatedSpells)
-    }
+    fun applyEffectBeforeTurn() =GameStatus (
+        player.applyEffectBeforeTurn(currentSpells),
+        boss.applyEffectBeforeTurn(currentSpells),
+        currentSpells.reduceLife()
+    )
 
     fun applyInstantEffects() = GameStatus(
         currentSpells.last().instantEffectOnPlayer(player),
@@ -56,24 +65,18 @@ data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<S
         currentSpells
     )
 
-    fun addSpellAndDeductCost(newSpell: Spell):GameStatus {
-        val player = Player(player.armour, player.hitPoints, mana - newSpell.cost)
-        return GameStatus(player, boss, currentSpells + newSpell)
-    }
+    fun addSpellAndDeductCost(newSpell: Spell):GameStatus =
+        GameStatus(player.reduceMana(newSpell.cost), boss, currentSpells + newSpell)
 
-    fun attackPlayer():GameStatus {
-        val attackedPlayer =
-            if (player.armour < boss.damage) Player( player.armour, player.hitPoints + player.armour - boss.damage, player.mana )
-            else Player( player.armour, player.hitPoints - 1, player.mana)
-        return GameStatus(attackedPlayer, boss, currentSpells)
-    }
+    fun attackPlayer():GameStatus = GameStatus(player.attackPlayer(boss.damage), boss, currentSpells)
+
     fun playerHasWon() = boss.hitPoints <= 0
     fun bossHasWon() = player.hitPoints <= 0
 }
 
 data class GameInfo(var minSpellCost:Int = Int.MAX_VALUE)
 
-val allSpells = listOf(MagicMissle(), Drain(), Shield(), Poison(), Recharge(), PartTwoSpell())
+val allSpells = listOf(MagicMissile(), Drain(), Shield(), Poison(), Recharge(), PartTwoSpell())
 
 fun playTurn(gameStatus:GameStatus, spellsCast:List<Spell> = listOf(), spellText:String = "", gameInfo:GameInfo = GameInfo()):List<List<Spell>> {
 
