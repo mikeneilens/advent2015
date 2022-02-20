@@ -25,6 +25,7 @@ abstract class Spell(val name:String, val cost:Int, val lifeLeft:Int) {
     open fun instantEffectOnPlayer(player:Player) = player
     open fun instantEffectOnBoss(boss:Boss) = boss
     open fun reduceLife():Spell = this
+    fun hasLifeLeft() = lifeLeft > 0
 }
 class MagicMissile:Spell("Magic Missile", 53,0) {
     override fun instantEffectOnBoss(boss: Boss) = boss.reduceHitPoints(4)
@@ -49,7 +50,7 @@ class PartTwoSpell:Spell("PartTwo Spell", 99999, 99999) {
     override fun updatePlayerBeforeTurn(player: Player) = player.reduceHitPoint(1)
 }
 
-fun List<Spell>.reduceLife() = fold(listOf<Spell>()){ newSpells, spell -> if (spell.lifeLeft > 1 ) newSpells + spell.reduceLife() else newSpells}
+fun List<Spell>.reduceLife() =  map(Spell::reduceLife).filter(Spell::hasLifeLeft)
 
 data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<Spell> = listOf(), val mana:Int = player.mana ) {
 
