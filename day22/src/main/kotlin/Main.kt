@@ -1,8 +1,5 @@
 data class Boss(val damage:Int, val hitPoints:Int) {
     fun reduceHitPoints(amount:Int) = copy(hitPoints = hitPoints - amount )
-
-    fun applyEffectBeforeTurn(spells:List<Spell>):Boss = spells.fold(this, Boss::updateBossUsingSpell)
-    fun updateBossUsingSpell(spell:Spell) = spell.updateBossBeforeTurn(this)
 }
 
 data class Player(val armour:Int, val hitPoints:Int, val mana:Int) {
@@ -15,8 +12,6 @@ data class Player(val armour:Int, val hitPoints:Int, val mana:Int) {
     fun reduceMana(amount:Int) = increaseMana(-amount)
 
     fun attackPlayer(damage:Int) = if (armour < damage) reduceHitPoint(damage - armour) else reduceHitPoint(1)
-    fun applyEffectBeforeTurn(spells:List<Spell>):Player = spells.fold(this.withNoArmour, Player::updatePlayerUsingSpell)
-    fun updatePlayerUsingSpell(spell:Spell) = spell.updatePlayerBeforeTurn(this)
 }
 
 abstract class Spell(val name:String, val cost:Int, val lifeLeft:Int) {
@@ -27,6 +22,7 @@ abstract class Spell(val name:String, val cost:Int, val lifeLeft:Int) {
     open fun reduceLife():Spell = this
     fun hasLifeLeft() = lifeLeft > 0
 }
+
 class MagicMissile:Spell("Magic Missile", 53,0) {
     override fun instantEffectOnBoss(boss: Boss) = boss.reduceHitPoints(4)
 }
@@ -55,8 +51,8 @@ fun List<Spell>.reduceLife() =  map(Spell::reduceLife).filter(Spell::hasLifeLeft
 data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<Spell> = listOf(), val mana:Int = player.mana ) {
 
     fun applyEffectBeforeTurn() =GameStatus (
-        player.applyEffectBeforeTurn(currentSpells),
-        boss.applyEffectBeforeTurn(currentSpells),
+        applyEffectBeforeTurn(player),
+        applyEffectBeforeTurn(boss),
         currentSpells.reduceLife()
     )
 
@@ -73,7 +69,15 @@ data class GameStatus(val player:Player, val boss:Boss, val currentSpells:List<S
 
     fun playerHasWon() = boss.hitPoints <= 0
     fun bossHasWon() = player.hitPoints <= 0
+
+    fun applyEffectBeforeTurn(boss: Boss):Boss = currentSpells.fold(boss, this::updateUsingSpell)
+    fun updateUsingSpell(boss:Boss, spell: Spell) = spell.updateBossBeforeTurn(boss)
+
+    fun applyEffectBeforeTurn(player: Player):Player = currentSpells.fold(player.withNoArmour, this::updateUsingSpell)
+    fun updateUsingSpell(player: Player, spell: Spell) = spell.updatePlayerBeforeTurn(player)
+
 }
+
 
 data class GameInfo(var minSpellCost:Int = Int.MAX_VALUE)
 
